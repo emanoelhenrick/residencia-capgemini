@@ -22,3 +22,5 @@ O diagrama abaixo ilustra o fluxo de atividades do sistema, separando as ações
 
 ## 5. Storyboard
 ![quadro de trello](https://github.com/emanoelhenrick/residencia-capgemini/blob/40d17c9ea50f02c77ccd17afb20c4aece199d0b2/quadro_trello.png).
+<img width="1366" height="768" alt="Captura de tela 2025-10-22 202719" src="https://github.com/user-attachments/assets/6777b0b9-418f-4b58-9fa9-e8e02c2afecd" />
+
