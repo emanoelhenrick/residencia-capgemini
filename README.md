@@ -5,3 +5,7 @@
 
 ## Quadro Trello
 ![quadro de trello](https://github.com/emanoelhenrick/residencia-capgemini/blob/40d17c9ea50f02c77ccd17afb20c4aece199d0b2/quadro_trello.png).
+
+## Telas do Figma
+https://github.com/user-attachments/assets/388dbf06-baf7-465b-af96-b553e8502f93
+
