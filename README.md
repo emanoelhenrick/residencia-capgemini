@@ -8,7 +8,7 @@ A equipe do projeto é composta pelos seguintes membros e suas respectivas funç
 
 - **Everton Nunes** - Product Owner (PO)
 - **Gabriela Menezes** - Scrum Master
-- **Emanuel Henrique** - DEsenvolvedor
+- **Emanoel Henrick** - Desenvolvedor
 - **Davi Lucas** - Desenvolvedor
 - **Nicolas Natario** - Desenvolvedor
   
