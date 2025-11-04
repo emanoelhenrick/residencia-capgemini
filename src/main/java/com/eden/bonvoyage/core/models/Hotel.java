@@ -1,5 +1,6 @@
 package com.eden.bonvoyage.core.models;
 
+import com.eden.bonvoyage.core.models.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class Hotel {
   private String phone;
   private String email;
 
-  private double avaliacaoMedia;
+  private double averageRating;
 
   private boolean isEnable;
 
@@ -35,6 +36,6 @@ public class Hotel {
   private List<Room> rooms;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  private HostAccount hostAccount;
+  private User host;
 
 }

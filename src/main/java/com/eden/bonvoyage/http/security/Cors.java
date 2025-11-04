@@ -1,4 +1,4 @@
-package com.eden.bonvoyage.http.config;
+package com.eden.bonvoyage.http.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
