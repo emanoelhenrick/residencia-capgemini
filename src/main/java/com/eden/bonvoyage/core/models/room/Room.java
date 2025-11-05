@@ -1,5 +1,6 @@
-package com.eden.bonvoyage.core.models;
+package com.eden.bonvoyage.core.models.room;
 
+import com.eden.bonvoyage.core.models.property.Property;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -20,6 +21,6 @@ public class Room {
 
   @ManyToOne
   @JoinColumn(nullable = false)
-  private Hotel hotel;
+  private Property property;
 
 }

@@ -1,11 +1,13 @@
-package com.eden.bonvoyage.core.models;
+package com.eden.bonvoyage.core.models.property;
 
+import com.eden.bonvoyage.core.models.room.Room;
 import com.eden.bonvoyage.core.models.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,8 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "hotel")
-public class Hotel {
+@Table(name = "property")
+public class Property {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,17 +27,21 @@ public class Hotel {
 
   private String address;
 
-  private String phone;
-  private String email;
-
   private double averageRating;
 
   private boolean isEnable;
 
-  @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY)
-  private List<Room> rooms;
+  @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
+  private List<Room> rooms = new ArrayList<>();
 
   @ManyToOne(fetch = FetchType.LAZY)
   private User host;
+
+  public Property(NewPropertyDTO data) {
+    this.name = data.name();
+    this.address = data.address();
+    this.description = data.description();
+    this.isEnable = true;
+  }
 
 }

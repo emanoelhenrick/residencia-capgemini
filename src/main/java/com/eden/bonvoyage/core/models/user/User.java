@@ -1,6 +1,6 @@
 package com.eden.bonvoyage.core.models.user;
 
-import com.eden.bonvoyage.core.models.Hotel;
+import com.eden.bonvoyage.core.models.property.Property;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,7 +42,7 @@ public class User implements UserDetails {
   private UserRole role;
 
   @OneToMany(mappedBy = "host")
-  private List<Hotel> hotels = new ArrayList<>();
+  private List<Property> properties = new ArrayList<>();
 
   public User(String name, String email, String password, UserRole role) {
     this.name = name;
