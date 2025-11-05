@@ -3,7 +3,6 @@ package com.eden.bonvoyage.core.services.property;
 import com.eden.bonvoyage.core.exceptions.UserNotFoundException;
 import com.eden.bonvoyage.core.models.property.NewPropertyDTO;
 import com.eden.bonvoyage.core.models.property.Property;
-import com.eden.bonvoyage.core.models.user.User;
 import com.eden.bonvoyage.core.repository.PropertyRepository;
 import com.eden.bonvoyage.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
