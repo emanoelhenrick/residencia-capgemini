@@ -1,6 +1,8 @@
 package com.eden.bonvoyage.core.models.room;
 
 import com.eden.bonvoyage.core.models.accommodation.Accommodation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,6 +49,14 @@ public class Room {
 
   @ManyToOne
   @JoinColumn(nullable = false)
+  @JsonIgnore
   private Accommodation accommodation;
 
+  @JsonProperty("accommodation")
+  public Object getAccommodationSummary() {
+    return new Object() {
+      public final UUID id = accommodation.getId();
+      public final String name = accommodation.getName();
+    };
+  }
 }

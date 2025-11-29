@@ -4,10 +4,10 @@ import java.util.List;
 
 public record RoomFilter(
   List<Vibe> vibe,
+  List<Amenities> amenities,
   double initialPrice,
   double endPrice,
   String Location,
-  int roomsNumber,
   double minimiumRating
 ) {
 }
