@@ -5,6 +5,7 @@ import com.eden.bonvoyage.core.models.room.RoomFilter;
 import com.eden.bonvoyage.core.repository.RoomRepository;
 import com.eden.bonvoyage.core.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,9 @@ public class RoomController {
   @Autowired
   RoomService roomService;
 
-  @GetMapping("/filter")
-  List<Room> findByFilters(@RequestBody RoomFilter filter) {
+  @GetMapping
+  List<Room> find(@Nullable @RequestBody RoomFilter filter) {
+    if  (filter == null) return roomService.findAll();
     return roomService.findByFilters(filter);
   }
 
