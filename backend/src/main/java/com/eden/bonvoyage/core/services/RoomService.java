@@ -52,8 +52,8 @@ public class RoomService {
       })
       // rating
       .filter(room -> {
-        if (filter.minimiumRating() <= 0) return true;
-        return room.getAccommodation().getRating() >= filter.minimiumRating();
+        if (filter.minimumRating() <= 0) return true;
+        return room.getAccommodation().getRating() >= filter.minimumRating();
       })
       .toList();
   }

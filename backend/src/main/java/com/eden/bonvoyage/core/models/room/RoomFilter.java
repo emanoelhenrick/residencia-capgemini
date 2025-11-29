@@ -8,6 +8,6 @@ public record RoomFilter(
   double initialPrice,
   double endPrice,
   String Location,
-  double minimiumRating
+  double minimumRating
 ) {
 }
