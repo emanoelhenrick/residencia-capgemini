@@ -1,6 +1,5 @@
 package com.eden.bonvoyage.core.models.user;
 
-import com.eden.bonvoyage.core.models.property.Property;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -37,18 +35,10 @@ public class User implements UserDetails {
   @Column(nullable = false)
   private String password;
 
-  @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
-  private UserRole role;
-
-  @OneToMany(mappedBy = "host")
-  private List<Property> properties = new ArrayList<>();
-
-  public User(String name, String email, String password, UserRole role) {
+  public User(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
-    this.role = role;
   }
 
   @Override
@@ -59,12 +49,6 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    if (this.role == UserRole.ADMIN) {
-      return List.of(
-        new SimpleGrantedAuthority("ROLE_ADMIN"),
-        new SimpleGrantedAuthority("ROLE_USER")
-      );
-    }
     return List.of(new SimpleGrantedAuthority("ROLE_USER"));
   }
 

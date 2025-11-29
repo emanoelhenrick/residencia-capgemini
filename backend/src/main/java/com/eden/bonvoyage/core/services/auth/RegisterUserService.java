@@ -21,7 +21,7 @@ public class RegisterUserService {
     if (isUserAlreadyExists != null) throw new RuntimeException("User already exists");
 
     var encryptedPassword = passwordEncoder.encode(data.password());
-    var newUser = new User(data.name(), data.email(), encryptedPassword, data.role());
+    var newUser = new User(data.name(), data.email(), encryptedPassword);
 
     this.userRepository.save(newUser);
   }

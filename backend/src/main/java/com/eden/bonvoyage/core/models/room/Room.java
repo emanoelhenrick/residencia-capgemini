@@ -1,11 +1,13 @@
 package com.eden.bonvoyage.core.models.room;
 
-import com.eden.bonvoyage.core.models.property.Property;
+import com.eden.bonvoyage.core.models.accommodation.Accommodation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -23,18 +25,28 @@ public class Room {
   private int capacity;
   private double pricePerNight;
   private String description;
+  private String img;
 
-  private boolean isAvailable;
+  @ElementCollection(targetClass = Amenities.class)
+  @Enumerated(EnumType.STRING)
+  @CollectionTable(
+    name = "room_amenities",
+    joinColumns = @JoinColumn(name = "room_id")
+  )
+  @Column(name = "amenities")
+  private List<Amenities> amenities = new ArrayList<>();
+
+  @ElementCollection(targetClass = Vibe.class)
+  @Enumerated(EnumType.STRING)
+  @CollectionTable(
+    name = "room_vibes",
+    joinColumns = @JoinColumn(name = "room_id")
+  )
+  @Column(name = "vibe")
+  private List<Vibe> vibe = new ArrayList<>();
 
   @ManyToOne
   @JoinColumn(nullable = false)
-  private Property property;
-
-  public Room(NewRoomDTO data) {
-    this.number = data.number();
-    this.capacity = data.capacity();
-    this.pricePerNight = data.pricePerNight();
-    this.description = data.description();
-  }
+  private Accommodation accommodation;
 
 }
