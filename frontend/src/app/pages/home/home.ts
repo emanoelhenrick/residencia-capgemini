@@ -16,7 +16,7 @@ export class Home {
 
   constructor(private modalService: BsModalService) {}
 
-  abrirModal(mode: 'login' | 'signup'): void {
+  abrirModalAuth(mode: 'login' | 'signup'): void {
     this.bsModalRef = this.modalService.show(Auth, {
       initialState: { mode } as any,
     });

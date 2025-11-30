@@ -1,0 +1,68 @@
+<div class="fundo_branco">
+
+
+    <div *ngIf="loading">
+        <p>Carregando quartos...</p>
+    </div>
+
+    <div *ngIf="error">
+        <p>Erro ao carregar os quartos. Tente novamente.</p>
+    </div>
+
+    <!-- Se um quarto foi selecionado, mostra o detalhe -->
+    <div *ngIf="selectedRoom" class="room-detail">
+        <div class="room-detail-card">
+            <h2>Quarto {{ selectedRoom.number }}</h2>
+            <p><lucide-icon name="users" size="16"></lucide-icon> {{ selectedRoom.capacity }} pessoas</p>
+            <p>{{ selectedRoom.pricePerNight | currency:'BRL' }} /noite</p>
+            <p *ngIf="selectedRoom.description" class="description">{{ selectedRoom.description }}</p>
+
+            <p (click)="abrirModalHotel()" id="nameHotel">{{accommodation.name}}</p>
+
+            <div *ngIf="selectedRoom.amenities?.length" class="amenities">
+                <strong>Comodidades:</strong>
+                <span *ngFor="let amenity of selectedRoom.amenities" class="amenity-badge">{{ amenity }}</span>
+            </div>
+
+            <div *ngIf="selectedRoom.vibe?.length" class="vibe">
+                <strong>Ambiente:</strong>
+                <span *ngFor="let v of selectedRoom.vibe" class="vibe-badge"> {{ v }}</span>
+            </div>
+
+            <div class="detail-actions">
+                <button (click)="close()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de quartos (quando não há um selectedRoom) -->
+    <div *ngIf="!selectedRoom && accommodation?.rooms?.length" class="rooms-container">
+        <div *ngFor="let room of accommodation.rooms" class="room_card">
+            <h2>Quarto {{ room.number }}</h2>
+            <p><lucide-icon name="users" size="16"></lucide-icon> {{ room.capacity }} pessoas</p>
+            <p>{{ room.pricePerNight | currency:'BRL' }}/noite</p>
+
+            <p *ngIf="room.description" class="description">{{ room.description }}</p>
+
+            <div *ngIf="room.amenities?.length" class="amenities">
+                <strong>Comodidades:</strong>
+                <span *ngFor="let amenity of room.amenities" class="amenity-badge">{{ amenity }}</span>
+            </div>
+
+            <div *ngIf="room.vibe?.length" class="vibe">
+                <strong>Ambiente:</strong>
+                <span *ngFor="let v of room.vibe" class="vibe-badge">{{ v }}</span>
+            </div>
+
+            <button (click)="selectedRoom = room">Ver Detalhes</button>
+        </div>
+    </div>
+
+    <div *ngIf="accommodation && (!accommodation.rooms || accommodation.rooms.length === 0)" class="no-rooms">
+        <p>Nenhum quarto encontrado para este hotel.</p>
+    </div>
+
+    <div *ngIf="!accommodation && !loading && !error" class="no-data">
+        <p>Selecione uma acomodação para ver os quartos.</p>
+    </div>
+</div>

@@ -1,37 +1,26 @@
 <div class="accommodations">
   <div class="text_accommodate">
-    <h2>Acomodações Disponíveis</h2>
-    <p>{{quantItens()}} propriedades Disponíveis</p>
+    <h2>Quartos Disponíveis</h2>
+    <p>{{ quantItens() }} quartos Disponíveis</p>
   </div>
-  
-  <div class="objects">
-    @for(accommodate of response; track $index){
-      <div class="accommodation-card">
-        <img [src]="accommodate.img" alt="Imagem da acomodação" />
-        <h3>{{accommodate.name}}</h3>
-        <p>{{accommodate.description}}</p>
-        <p>Localização: {{accommodate.location}}</p>
-       
-        <div class="especificacoes">
-          <p><lucide-icon name="users" size="16"></lucide-icon>{{accommodate.quant_de_hospedes}}</p>
-          <p><lucide-icon name="bed" size="16"></lucide-icon>{{accommodate.quant_de_quartos}}</p>
-          <p><lucide-icon name="bath" size="16"></lucide-icon>{{accommodate.quant_de_banheiros}}</p>
-        </div>
 
-        <div class="parte_baixo">
-          <div>
-            <div class="price">
-              <p id="number_price">{{accommodate.pricePerNight | currency}}</p>
-              <p>/noite</p>
-            </div>
+  <div class="objects_accommodate">
+    
+    <div *ngFor="let room of roomsList" class="room-card">
+      <img [src]="room.img || room.accommodation?.img" alt="Imagem do quarto" />
+      <h3>Quarto {{ room.number }} — {{ room.accommodation?.name }}</h3>
+      <p>{{ room.description }}</p>
 
-            <p>{{accommodate.avaliations}} avaliações</p>
-          </div>
-          
-          <button>Ver Detalhes</button>
+      <div class="room-meta">
+        <p><lucide-icon name="users" size="16"></lucide-icon> {{ room.capacity || room.quant_de_hospedes || '-' }} pessoas</p>
+      </div>
+
+      <div class="parte_baixo">
+        <p class="price">{{ room.pricePerNight | currency }} / noite</p>
+        <div class="room-actions">
+          <button (click)="abrirModalRoom(room.accommodation, room)">Ver Detalhes</button>
         </div>
       </div>
-    }
+    </div>
   </div>
-  
-</div>
+</div>s

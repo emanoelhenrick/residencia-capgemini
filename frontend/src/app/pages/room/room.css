@@ -1,0 +1,49 @@
+.fundo_branco{
+    background-color: white;
+    /* Ajusta largura ao conteúdo (cresce conforme cards) */
+    display: inline-block;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: 100%; /* evita ultrapassar a largura da viewport */
+    margin: 0 auto; /* centra quando couber */
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto; /* permite scroll se o conteúdo for maior que a tela */
+}
+
+.rooms-container{
+    display: flex;
+    flex-direction: row;
+    /* não quebrar (mantém os cards em linha e faz o container crescer horizontalmente) */
+    flex-wrap: nowrap;
+    align-items: stretch; /* Estica os cards verticalmente */
+    justify-content: flex-start; /* Alinha à esquerda */
+    gap: 20px;
+    /* Container naturalmente se expande conforme o número de cards */
+    width: auto;
+    min-height: 200px; /* Altura mínima do container */
+}
+
+.room_card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* largura fixa para que o container cresça horizontalmente */
+    flex: 0 0 300px; /* não encolhe nem cresce, base 300px */
+    min-width: 300px;
+    /* Cresce verticalmente com conteúdo */
+    height: auto;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui conteúdo */
+}
+
+#nameHotel{
+
+    font-weight: bold;
+    cursor: pointer;
+}
