@@ -1,0 +1,26 @@
+.hotel-modal{
+    padding: 16px;
+}
+
+.rooms-grid{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   overflow-x: auto;
+   gap: 15px;
+   padding-bottom: 10px;
+}
+
+.room-card{
+    border-radius: 10px;
+    box-shadow: 2px 8px 16px rgba(0,0,0,0.1);
+    padding: 15px;
+    background-color: #fff;
+    flex: 0 0 300px;
+    min-width: 300px;
+    margin: 8px;
+}
+.room-card:hover{
+    box-shadow: 3px 5px 20px rgba(0,0,0,0.2);
+    transform: scale(1.01);
+}

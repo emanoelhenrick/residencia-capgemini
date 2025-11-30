@@ -14,6 +14,7 @@ import { Room } from '../room/room';
 })
 export class Accommodations implements OnInit {
   public response: any[] = [];
+  public roomsList: any[] = [];
   bsModalRef?: BsModalRef;
 
   constructor(
@@ -29,8 +30,18 @@ export class Accommodations implements OnInit {
   public fetchAccommodations(): void {
     this.accommodationsService.getAccommodations().subscribe(
       (data) => {
-        this.response = data; 
+        this.response = data;
+        // achatar lista de quartos incluindo referência à acomodação
+        this.roomsList = [];
+        for (const acc of this.response) {
+          const rooms = acc.rooms ?? [];
+          for (const r of rooms) {
+            // anexa referência à acomodação para cada quarto
+            this.roomsList.push({ ...r, accommodation: acc });
+          }
+        }
         console.log('Array de acomodações:', this.response);
+        console.log('Lista de quartos (achatada):', this.roomsList);
         this.cdr.detectChanges();
       },
       (error) => {
@@ -39,19 +50,26 @@ export class Accommodations implements OnInit {
     );
   }
 
-  abrirModalRoom(accommodation: any): void {
-    const initialState = {
-      id: accommodation.id // Extrai apenas o ID do objeto accommodation
-   };
-  
+  abrirModalRoom(accommodation: any, room?: any): void {
+    const initialState: any = {
+      id: accommodation?.id,
+      accommodation,
+      rooms: accommodation?.rooms ?? []
+    };
+
+    if (room) {
+      initialState.room = room; // passa um quarto específico quando solicitado
+    }
+
+    console.log('Abrindo Room modal com initialState:', initialState);
     this.bsModalRef = this.modalService.show(Room, { initialState });
 
-      setTimeout(() => {
-    this.cdr.detectChanges();
-  });
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    });
   }
 
   quantItens(): number {
-    return this.response ? this.response.length : 0;
+    return this.roomsList ? this.roomsList.length : 0;
   }
 }

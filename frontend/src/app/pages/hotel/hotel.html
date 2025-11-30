@@ -1,0 +1,97 @@
+<div class="hotel-modal">
+  <div class="modal-header">
+    <h2>Detalhes do Hotel</h2>
+    <button (click)="close()" class="close-btn">×</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Carregando detalhes do hotel...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>Erro ao carregar os detalhes do hotel. Tente novamente.</p>
+  </div>
+
+  <div *ngIf="hotel && !loading" class="hotel-details">
+    <!-- Informações principais do hotel -->
+    <div class="hotel-info">
+      <h3>{{ hotel.name }}</h3>
+      
+      <div *ngIf="hotel.description" class="description">
+        <p>{{ hotel.description }}</p>
+      </div>
+
+      <div class="hotel-meta">
+        <p><strong>Endereço:</strong> {{ hotel.address }}, {{ hotel.city }} - {{ hotel.state }}</p>
+        <p *ngIf="hotel.phone"><strong>Telefone:</strong> {{ hotel.phone }}</p>
+        <p *ngIf="hotel.email"><strong>Email:</strong> {{ hotel.email }}</p>
+        <p *ngIf="hotel.website"><strong>Site:</strong> <a [href]="hotel.website" target="_blank">{{ hotel.website }}</a></p>
+        <p *ngIf="hotel.rating"><strong>Avaliação:</strong> {{ hotel.rating }}/5</p>
+      </div>
+
+      <!-- Comodidades do hotel -->
+      <div *ngIf="hotel.amenities?.length" class="amenities">
+        <h4>Comodidades do Hotel:</h4>
+        <div class="amenities-list">
+          <span *ngFor="let amenity of hotel.amenities" class="amenity-badge">
+            {{ amenity }}
+          </span>
+        </div>
+      </div>
+
+      <!-- botão por quarto agora aparece dentro de cada card abaixo -->
+    </div>
+
+    <!-- Lista de quartos do hotel -->
+    <div class="hotel-rooms-section">
+      <h4>Quartos Disponíveis ({{ hotel.rooms?.length || 0 }})</h4>
+      
+      <div *ngIf="hotel.rooms?.length" class="rooms-grid">
+        <div *ngFor="let room of hotel.rooms" class="room-card">
+          <div class="room-header">
+            <h5>Quarto {{ room.number }}</h5>
+            <span class="room-price">{{ room.pricePerNight | currency:'BRL' }}/noite</span>
+          </div>
+          
+          <div class="room-details">
+            <p class="room-capacity">
+              <lucide-icon name="users" size="16"></lucide-icon> 
+              {{ room.capacity }} pessoa{{ room.capacity > 1 ? 's' : '' }}
+            </p>
+            
+            <p *ngIf="room.description" class="room-description">{{ room.description }}</p>
+            
+            <div *ngIf="room.amenities?.length" class="room-amenities">
+              <strong>Comodidades:</strong>
+              <div class="amenities-tags">
+                <span *ngFor="let amenity of room.amenities" class="amenity-tag">
+                  {{ amenity }}
+                </span>
+              </div>
+            </div>
+
+            <div *ngIf="room.vibe?.length" class="room-vibe">
+              <strong>Ambiente:</strong>
+              <div class="vibe-tags">
+                <span *ngFor="let v of room.vibe" class="vibe-tag">
+                  {{ v }}
+                </span>
+              </div>
+            </div>
+            <div class="room-card-actions">
+              <button (click)="abrirModalRoom(hotel, room)">Ver Detalhes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!hotel.rooms?.length" class="no-rooms">
+        <p>Nenhum quarto disponível neste hotel.</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!hotel && !loading && !error" class="no-data">
+    <p>Nenhum dado do hotel disponível.</p>
+  </div>
+</div>

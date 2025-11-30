@@ -2,7 +2,7 @@
     width: 75%;
     padding: 2rem;
 }
-.objects{
+.objects_accommodate{
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
@@ -10,7 +10,7 @@
     padding: 2rem 0;
 }
 
-.accommodation-card{
+.room-card{
     width: 22rem;
     border-radius: 16px;
     overflow: hidden;
@@ -18,13 +18,13 @@
     transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.accommodation-card:hover{
+.room-card:hover{
     box-shadow: 3px 5px 20px rgba(0,0,0,0.2);
     transition: box-shadow 0.3s ease-in-out;
     transform: scale(1.01); 
 }
 
-.accommodation-card img{
+.room-card img{
     height: 15rem;
     width: 100%;
 }
@@ -46,7 +46,7 @@
     padding: 1rem;    
 }
 
-.parte_baixo button{
+.room-actions button{
     background: var(--btn_principal);
     color: white;
     border: none;
@@ -54,7 +54,7 @@
     padding: 0.3rem 0.8rem;
     transition: 0.5s;
 }
-.parte_baixo button:hover{
+.room-actions button:hover{
     opacity: 0.9;
     cursor: pointer;
 }
