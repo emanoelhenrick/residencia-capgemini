@@ -1,0 +1,52 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem 1rem 3rem;
+    box-shadow: 8px 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+.titulo {
+    display: flex;
+    gap: 8px;
+}
+
+.titulo svg{
+    transform: rotate(40deg);
+}
+
+.titulo h1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+
+.btn_auth {
+    display: flex;
+    gap: 5px;
+}
+
+.btn_auth button {
+    border-radius: 8px;
+    border: none;
+    padding: 5px 7px 5px 7px;
+
+    font-weight: 600;
+}
+
+#signup {
+    background-color: var(--btn_secondary);
+    color: white;
+    transition: 0.5s ease   ;
+}
+#signup:hover{
+    background-color: var(--btn_secondary_hover);
+}
+
+#login {
+    background: none;    
+}
+
+.app-objects {
+    margin-top: 2rem;
+}

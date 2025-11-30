@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --btn_principal: #2c86ec;
+    --btn_secondary: #000000;
+    --btn_secondary_hover: #3c3c3c;
+}
+
+.modal-dialog {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+

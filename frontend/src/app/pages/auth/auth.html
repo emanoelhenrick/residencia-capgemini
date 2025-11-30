@@ -1,0 +1,31 @@
+<div class="Auth_container">
+    <div id="linha-principal">
+        <h2>{{ IsLoginMode ? 'Entrar na sua conta' : 'Criar conta' }}</h2>
+        <button id="fecharModal" (click)="fecharModal()"><i class="fi fi-br-cross"></i></button>
+    </div>
+
+    <p>{{IsLoginMode ? "Acesse para gerenciar suas reservas e preferências" : "Cadastre-se para começar a planejar suas viagens"}}</p>
+
+    <form class="form_geral" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form_sem_btn">
+
+            <div class="forms_nome" *ngIf="!IsLoginMode">
+                <label for="name">Nome</label>
+                <input id="name" formControlName="name" placeholder="Seu nome" />
+            </div>
+
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" placeholder="seu@email.com"/>
+
+            <label for="password">Senha</label>
+            <input id="password" type="password" formControlName="password" [placeholder]="IsLoginMode ? 'Minimo 6 caracteres' : 'Minimo 6 caracteres'"/>
+        </div>
+        
+        <div class="btns">
+            <button id="submit" type="submit">{{ IsLoginMode ? 'Entrar' : 'Cadastrar' }}</button>
+            <button id="troca_modo" type="button" (click)="toggleMode()">{{ IsLoginMode ? 'Criar conta' : 'já tenho conta' }}</button>
+            
+        </div>
+        
+    </form>
+</div>
