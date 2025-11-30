@@ -8,12 +8,12 @@
 
     <form class="form_geral" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form_sem_btn">
-
-            <div class="forms_nome" *ngIf="!IsLoginMode">
-                <label for="name">Nome</label>
-                <input id="name" formControlName="name" placeholder="Seu nome" />
-            </div>
-
+            @if(!IsLoginMode){
+                <div class="forms_nome">
+                    <label for="name">Nome</label>
+                    <input id="name" formControlName="name" placeholder="Seu nome" />
+                </div>
+            }   
             <label for="email">Email</label>
             <input id="email" formControlName="email" type="email" placeholder="seu@email.com"/>
 

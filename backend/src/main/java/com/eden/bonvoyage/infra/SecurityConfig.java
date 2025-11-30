@@ -25,10 +25,12 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     return httpSecurity
       .csrf(csrf -> csrf.disable())
+      .cors(cors -> {})
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+        .requestMatchers(HttpMethod.GET, "/accommodation/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/hotel").hasRole("ADMIN")
         .anyRequest().authenticated()
       )

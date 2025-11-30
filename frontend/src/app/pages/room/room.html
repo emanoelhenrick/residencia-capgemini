@@ -1,0 +1,68 @@
+<div class="fundo_branco">
+    <!-- Título dinâmico -->
+    @if(accommodation){
+        <h1>Quartos - {{accommodation.name}}</h1>
+        <p>{{accommodation.description}}</p>
+        <p><strong>Localização:</strong> {{accommodation.location}}</p>
+    }
+    @else {
+        <h1>Quartos</h1>
+    }
+    
+    <!-- Estados de loading e erro -->
+    @if(loading){
+        <div class="loading">
+            <p>Carregando quartos...</p>
+        </div>
+    }
+    @else if(error){
+        <div class="error">
+            <p>Erro ao carregar os quartos. Tente novamente.</p>
+        </div>
+    }
+    @else if(accommodation && accommodation.rooms && accommodation.rooms.length > 0){
+        <div class="rooms-container">
+            @for(room of accommodation.rooms; track room.id){
+                <div class="room_card">
+                    <h2>Quarto {{room.number}}</h2>
+                    <p><lucide-icon name="users" size="16"></lucide-icon> {{room.capacity}} pessoas</p>
+                    <p>{{room.pricePerNight | currency:'BRL'}}/noite</p>
+                    
+                    @if(room.description){
+                        <p class="description">{{room.description}}</p>
+                    }
+                    
+                    <!-- Amenities -->
+                    @if(room.amenities && room.amenities.length > 0){
+                        <div class="amenities">
+                            <strong>Comodidades:</strong>
+                            @for(amenity of room.amenities; track $index){
+                                <span class="amenity-badge">{{amenity}}</span>
+                            }
+                        </div>
+                    }
+                    
+                    <!-- Vibe -->
+                    @if(room.vibe && room.vibe.length > 0){
+                        <div class="vibe">
+                            <strong>Ambiente:</strong>
+                            @for(vibe of room.vibe; track $index){
+                                <span class="vibe-badge">{{vibe}}</span>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    @else if(accommodation && (!accommodation.rooms || accommodation.rooms.length === 0)){
+        <div class="no-rooms">
+            <p>Nenhum quarto encontrado para este hotel.</p>
+        </div>
+    }
+    @else {
+        <div class="no-data">
+            <p>Selecione uma acomodação para ver os quartos.</p>
+        </div>
+    }
+</div>
