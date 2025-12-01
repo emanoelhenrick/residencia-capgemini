@@ -21,74 +21,74 @@ INSERT INTO accommodation (id, name, description, location, rating, img) VALUES
 -- =========================
 INSERT INTO room (id, number, capacity, price_per_night, description, img, accommodation_id) VALUES
 -- Accom 1 (rooms 101-105)
-('20000000-0000-0000-0000-000000000001','101',2,120.00,'Quarto casal com varanda.','room_101.jpg','10000000-0000-0000-0000-000000000001'),
-('20000000-0000-0000-0000-000000000002','102',1,90.00,'Quarto single compacto.','room_102.jpg','10000000-0000-0000-0000-000000000001'),
-('20000000-0000-0000-0000-000000000003','103',3,180.00,'Quarto triplo confortável.','room_103.jpg','10000000-0000-0000-0000-000000000001'),
-('20000000-0000-0000-0000-000000000004','104',4,240.00,'Suíte família com varanda.','room_104.jpg','10000000-0000-0000-0000-000000000001'),
-('20000000-0000-0000-0000-000000000005','105',2,150.00,'Quarto premium com decoração local.','room_105.jpg','10000000-0000-0000-0000-000000000001'),
+('20000000-0000-0000-0000-000000000001','101',2,120.00,'Quarto casal com varanda.','https://plus.unsplash.com/premium_photo-1661964402307-02267d1423f5?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000001'),
+('20000000-0000-0000-0000-000000000002','102',1,90.00,'Quarto single compacto.','https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000001'),
+('20000000-0000-0000-0000-000000000003','103',3,180.00,'Quarto triplo confortável.','https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000001'),
+('20000000-0000-0000-0000-000000000004','104',4,240.00,'Suíte família com varanda.','https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000001'),
+('20000000-0000-0000-0000-000000000005','105',2,150.00,'Quarto premium com decoração local.','https://images.unsplash.com/photo-1568495248636-6432b97bd949?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000001'),
 
 -- Accom 2 (rooms 201-205)
-('20000000-0000-0000-0000-000000000006','201',2,140.00,'Quarto casal com lareira.','room_201.jpg','10000000-0000-0000-0000-000000000002'),
-('20000000-0000-0000-0000-000000000007','202',2,155.00,'Suíte com vista para a serra.','room_202.jpg','10000000-0000-0000-0000-000000000002'),
-('20000000-0000-0000-0000-000000000008','203',1,100.00,'Single aconchegante.','room_203.jpg','10000000-0000-0000-0000-000000000002'),
-('20000000-0000-0000-0000-000000000009','204',3,195.00,'Quarto triplo com varanda.','room_204.jpg','10000000-0000-0000-0000-000000000002'),
-('20000000-0000-0000-0000-00000000000a','205',4,260.00,'Suíte familiar com cozinha compacta.','room_205.jpg','10000000-0000-0000-0000-000000000002'),
+('20000000-0000-0000-0000-000000000006','201',2,140.00,'Quarto casal com lareira.','https://images.unsplash.com/photo-1631049552057-403cdb8f0658?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000002'),
+('20000000-0000-0000-0000-000000000007','202',2,155.00,'Suíte com vista para a serra.','https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000002'),
+('20000000-0000-0000-0000-000000000008','203',1,100.00,'Single aconchegante.','https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000002'),
+('20000000-0000-0000-0000-000000000009','204',3,195.00,'Quarto triplo com varanda.','https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000002'),
+('20000000-0000-0000-0000-00000000000a','205',4,260.00,'Suíte familiar com cozinha compacta.','https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','10000000-0000-0000-0000-000000000002'),
 
 -- Accom 3 (rooms 301-305)
-('20000000-0000-0000-0000-00000000000b','301',1,95.00,'Single business com workspace.','room_301.jpg','10000000-0000-0000-0000-000000000003'),
-('20000000-0000-0000-0000-00000000000c','302',2,130.00,'Quarto duplo standard.','room_302.jpg','10000000-0000-0000-0000-000000000003'),
-('20000000-0000-0000-0000-00000000000d','303',2,160.00,'Suíte executiva.','room_303.jpg','10000000-0000-0000-0000-000000000003'),
-('20000000-0000-0000-0000-00000000000e','304',3,180.00,'Triplo com cama extra.','room_304.jpg','10000000-0000-0000-0000-000000000003'),
-('20000000-0000-0000-0000-00000000000f','305',4,220.00,'Suíte família próxima ao restaurante.','room_305.jpg','10000000-0000-0000-0000-000000000003'),
+('20000000-0000-0000-0000-00000000000b','301',1,95.00,'Single business com workspace.','https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg','10000000-0000-0000-0000-000000000003'),
+('20000000-0000-0000-0000-00000000000c','302',2,130.00,'Quarto duplo standard.','https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg','10000000-0000-0000-0000-000000000003'),
+('20000000-0000-0000-0000-00000000000d','303',2,160.00,'Suíte executiva.','https://images.pexels.com/photos/2029719/pexels-photo-2029719.jpeg','10000000-0000-0000-0000-000000000003'),
+('20000000-0000-0000-0000-00000000000e','304',3,180.00,'Triplo com cama extra.','https://cdn.pixabay.com/photo/2016/04/15/11/45/hotel-1330841_960_720.jpg','10000000-0000-0000-0000-000000000003'),
+('20000000-0000-0000-0000-00000000000f','305',4,220.00,'Suíte família próxima ao restaurante.','https://cdn.pixabay.com/photo/2020/10/18/09/16/bedroom-5664221_960_720.jpg','10000000-0000-0000-0000-000000000003'),
 
 -- Accom 4 (rooms 401-405)
-('20000000-0000-0000-0000-000000000010','401',2,150.00,'Quarto ecológico com varanda.','room_401.jpg','10000000-0000-0000-0000-000000000004'),
-('20000000-0000-0000-0000-000000000011','402',1,100.00,'Single com vista para o bosque.','room_402.jpg','10000000-0000-0000-0000-000000000004'),
-('20000000-0000-0000-0000-000000000012','403',3,190.00,'Quarto família com espaço extra.','room_403.jpg','10000000-0000-0000-0000-000000000004'),
-('20000000-0000-0000-0000-000000000013','404',2,170.00,'Quarto casal com deck.','room_404.jpg','10000000-0000-0000-0000-000000000004'),
-('20000000-0000-0000-0000-000000000014','405',4,250.00,'Suíte ampla com vista para o lago.','room_405.jpg','10000000-0000-0000-0000-000000000004'),
+('20000000-0000-0000-0000-000000000010','401',2,150.00,'Quarto ecológico com varanda.','https://cdn.pixabay.com/photo/2017/01/14/12/48/hotel-1979406_960_720.jpg','10000000-0000-0000-0000-000000000004'),
+('20000000-0000-0000-0000-000000000011','402',1,100.00,'Single com vista para o bosque.','https://cdn.pixabay.com/photo/2023/09/09/06/33/bedroom-8242521_640.jpg','10000000-0000-0000-0000-000000000004'),
+('20000000-0000-0000-0000-000000000012','403',3,190.00,'Quarto família com espaço extra.','https://cdn.pixabay.com/photo/2024/06/27/08/50/ai-generated-8856798_640.jpg','10000000-0000-0000-0000-000000000004'),
+('20000000-0000-0000-0000-000000000013','404',2,170.00,'Quarto casal com deck.','https://cdn.pixabay.com/photo/2023/07/27/21/40/ai-generated-8154098_640.jpg','10000000-0000-0000-0000-000000000004'),
+('20000000-0000-0000-0000-000000000014','405',4,250.00,'Suíte ampla com vista para o lago.','https://images.pexels.com/photos/34961766/pexels-photo-34961766.jpeg','10000000-0000-0000-0000-000000000004'),
 
 -- Accom 5 (rooms 501-505)
-('20000000-0000-0000-0000-000000000015','501',2,300.00,'Suíte luxo com serviço 24h.','room_501.jpg','10000000-0000-0000-0000-000000000005'),
-('20000000-0000-0000-0000-000000000016','502',2,260.00,'Quarto premium com minibar.','room_502.jpg','10000000-0000-0000-0000-000000000005'),
-('20000000-0000-0000-0000-000000000017','503',3,320.00,'Suíte família premium.','room_503.jpg','10000000-0000-0000-0000-000000000005'),
-('20000000-0000-0000-0000-000000000018','504',1,220.00,'Single deluxe com amenities premium.','room_504.jpg','10000000-0000-0000-0000-000000000005'),
-('20000000-0000-0000-0000-000000000019','505',4,400.00,'Suíte presidencial.','room_505.jpg','10000000-0000-0000-0000-000000000005'),
+('20000000-0000-0000-0000-000000000015','501',2,300.00,'Suíte luxo com serviço 24h.','https://images.pexels.com/photos/34961507/pexels-photo-34961507.jpeg','10000000-0000-0000-0000-000000000005'),
+('20000000-0000-0000-0000-000000000016','502',2,260.00,'Quarto premium com minibar.','https://images.pexels.com/photos/34956629/pexels-photo-34956629.jpeg','10000000-0000-0000-0000-000000000005'),
+('20000000-0000-0000-0000-000000000017','503',3,320.00,'Suíte família premium.','https://softervolumes.com/wp-content/uploads/2021/03/Hotel-Koe-Tokyo-%E2%80%94-Modern-Design-Minimalist-Hotel-Shibuya-Japan-%E2%80%94-Softer-Volumes6-1024x683.jpg','10000000-0000-0000-0000-000000000005'),
+('20000000-0000-0000-0000-000000000018','504',1,220.00,'Single deluxe com amenities premium.','https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-8e222da/www.decorilla.com/online-decorating/wp-content/uploads/2019/01/Minimalist-hotel-room-decoration-by-Decorilla-1024x584.jpg','10000000-0000-0000-0000-000000000005'),
+('20000000-0000-0000-0000-000000000019','505',4,400.00,'Suíte presidencial.','https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-8e222da/www.decorilla.com/online-decorating/wp-content/uploads/2019/01/small-hotel-interior-design-online-with-hotel-room-decoration.jpg','10000000-0000-0000-0000-000000000005'),
 
 -- Accom 6 (rooms 601-605)
-('20000000-0000-0000-0000-00000000001a','601',2,130.00,'Quarto duplo simples próximo à praia.','room_601.jpg','10000000-0000-0000-0000-000000000006'),
-('20000000-0000-0000-0000-00000000001b','602',1,95.00,'Single com ventilador.','room_602.jpg','10000000-0000-0000-0000-000000000006'),
-('20000000-0000-0000-0000-00000000001c','603',3,170.00,'Quarto família com cama extra.','room_603.jpg','10000000-0000-0000-0000-000000000006'),
-('20000000-0000-0000-0000-00000000001d','604',2,150.00,'Suíte com varanda e rede.','room_604.jpg','10000000-0000-0000-0000-000000000006'),
-('20000000-0000-0000-0000-00000000001e','605',4,210.00,'Quarto família com cozinha compacta.','room_605.jpg','10000000-0000-0000-0000-000000000006'),
+('20000000-0000-0000-0000-00000000001a','601',2,130.00,'Quarto duplo simples próximo à praia.','https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-8e222da/www.decorilla.com/online-decorating/wp-content/uploads/2019/01/luxury-boutique-hotel-interior-design-online.jpg','10000000-0000-0000-0000-000000000006'),
+('20000000-0000-0000-0000-00000000001b','602',1,95.00,'Single com ventilador.','https://preview.redd.it/gyjr37k73qn61.jpg?width=640&crop=smart&auto=webp&s=d4f7f41a6e33bbdc6f3673b82dc8a4a57e7ecf31','10000000-0000-0000-0000-000000000006'),
+('20000000-0000-0000-0000-00000000001c','603',3,170.00,'Quarto família com cama extra.','https://media.timeout.com/images/106069979/1024/576/image.webp','10000000-0000-0000-0000-000000000006'),
+('20000000-0000-0000-0000-00000000001d','604',2,150.00,'Suíte com varanda e rede.','https://media.timeout.com/images/106070018/1024/576/image.webp','10000000-0000-0000-0000-000000000006'),
+('20000000-0000-0000-0000-00000000001e','605',4,210.00,'Quarto família com cozinha compacta.','https://media.timeout.com/images/106287000/1024/576/image.webp','10000000-0000-0000-0000-000000000006'),
 
 -- Accom 7 (rooms 701-705)
-('20000000-0000-0000-0000-00000000001f','701',1,125.00,'Single business com mesa de trabalho.','room_701.jpg','10000000-0000-0000-0000-000000000007'),
-('20000000-0000-0000-0000-000000000020','702',2,145.00,'Quarto duplo próximo ao centro de convenções.','room_702.jpg','10000000-0000-0000-0000-000000000007'),
-('20000000-0000-0000-0000-000000000021','703',2,160.00,'Suíte executiva com lavanderia.','room_703.jpg','10000000-0000-0000-0000-000000000007'),
-('20000000-0000-0000-0000-000000000022','704',3,180.00,'Triplo para equipe.','room_704.jpg','10000000-0000-0000-0000-000000000007'),
-('20000000-0000-0000-0000-000000000023','705',4,210.00,'Suíte corporativa com sala de reuniões.','room_705.jpg','10000000-0000-0000-0000-000000000007'),
+('20000000-0000-0000-0000-00000000001f','701',1,125.00,'Single business com mesa de trabalho.','https://i.pinimg.com/originals/33/a2/ef/33a2ef13fd9331064dc309b763475998.jpg','10000000-0000-0000-0000-000000000007'),
+('20000000-0000-0000-0000-000000000020','702',2,145.00,'Quarto duplo próximo ao centro de convenções.','https://img.freepik.com/premium-photo/3d-rendering-modern-bedroom-hotel-villa-interior-design_674881-1047.jpg','10000000-0000-0000-0000-000000000007'),
+('20000000-0000-0000-0000-000000000021','703',2,160.00,'Suíte executiva com lavanderia.','https://blog.artonemfg.com/hubfs/Arlo.jpg','10000000-0000-0000-0000-000000000007'),
+('20000000-0000-0000-0000-000000000022','704',3,180.00,'Triplo para equipe.','https://media.architecturaldigest.com/photos/6516eb0b621d6e6e3cf82343/master/w_960,c_limit/Dawid_Konieczny_Klopotowskiego_%C2%A9_ONI_Studio_4164-20.jpg','10000000-0000-0000-0000-000000000007'),
+('20000000-0000-0000-0000-000000000023','705',4,210.00,'Suíte corporativa com sala de reuniões.','https://glamorous-design.org/wp-content/uploads/2023/11/Untitled-design-2023-11-14T164245.836-scaled.jpg','10000000-0000-0000-0000-000000000007'),
 
 -- Accom 8 (rooms 801-805)
-('20000000-0000-0000-0000-000000000024','801',2,160.00,'Chalé duplo com lareira.','room_801.jpg','10000000-0000-0000-0000-000000000008'),
-('20000000-0000-0000-0000-000000000025','802',3,190.00,'Chalé família com cozinha.','room_802.jpg','10000000-0000-0000-0000-000000000008'),
-('20000000-0000-0000-0000-000000000026','803',1,110.00,'Chalé single aconchegante.','room_803.jpg','10000000-0000-0000-0000-000000000008'),
-('20000000-0000-0000-0000-000000000027','804',2,175.00,'Chalé com deck e vista.','room_804.jpg','10000000-0000-0000-0000-000000000008'),
-('20000000-0000-0000-0000-000000000028','805',4,230.00,'Chalé família premium.','room_805.jpg','10000000-0000-0000-0000-000000000008'),
+('20000000-0000-0000-0000-000000000024','801',2,160.00,'Chalé duplo com lareira.','https://glamorous-design.org/wp-content/uploads/2023/11/Untitled-design-2023-11-14T165022.678-scaled.jpg','10000000-0000-0000-0000-000000000008'),
+('20000000-0000-0000-0000-000000000025','802',3,190.00,'Chalé família com cozinha.','https://glamorous-design.org/wp-content/uploads/2023/11/Untitled-design-2023-11-14T165022.678-scaled.jpg','10000000-0000-0000-0000-000000000008'),
+('20000000-0000-0000-0000-000000000026','803',1,110.00,'Chalé single aconchegante.','https://glamorous-design.org/wp-content/uploads/2023/11/Untitled-design-2023-11-14T165143.955-1024x683.jpg','10000000-0000-0000-0000-000000000008'),
+('20000000-0000-0000-0000-000000000027','804',2,175.00,'Chalé com deck e vista.','https://glamorous-design.org/wp-content/uploads/2023/11/Untitled-design-2023-11-14T165802.267-1024x683.jpg','10000000-0000-0000-0000-000000000008'),
+('20000000-0000-0000-0000-000000000028','805',4,230.00,'Chalé família premium.','https://glamorous-design.org/wp-content/uploads/2023/11/image-12-1024x683.png','10000000-0000-0000-0000-000000000008'),
 
 -- Accom 9 (rooms 901-905)
-('20000000-0000-0000-0000-000000000029','901',2,210.00,'Quarto resort com atividades.','room_901.jpg','10000000-0000-0000-0000-000000000009'),
-('20000000-0000-0000-0000-00000000002a','902',3,260.00,'Suíte família com clube infantil.','room_902.jpg','10000000-0000-0000-0000-000000000009'),
-('20000000-0000-0000-0000-00000000002b','903',1,140.00,'Single com acesso ao spa.','room_903.jpg','10000000-0000-0000-0000-000000000009'),
-('20000000-0000-0000-0000-00000000002c','904',4,300.00,'Suíte premium com varanda panorâmica.','room_904.jpg','10000000-0000-0000-0000-000000000009'),
-('20000000-0000-0000-0000-00000000002d','905',2,200.00,'Quarto com atividades para crianças.','room_905.jpg','10000000-0000-0000-0000-000000000009'),
+('20000000-0000-0000-0000-000000000029','901',2,210.00,'Quarto resort com atividades.','https://glamorous-design.org/wp-content/uploads/2023/11/Untitled-design-2023-11-14T170048.508-scaled.jpg','10000000-0000-0000-0000-000000000009'),
+('20000000-0000-0000-0000-00000000002a','902',3,260.00,'Suíte família com clube infantil.','https://rusticinnatjh.com/wp-content/uploads/2018/03/Deluxe-King-primary-1-1024x654.jpg','10000000-0000-0000-0000-000000000009'),
+('20000000-0000-0000-0000-00000000002b','903',1,140.00,'Single com acesso ao spa.','https://cdn.homedit.com/wp-content/uploads/2019/01/Madonna-di-Campiglio-long-room.jpg','10000000-0000-0000-0000-000000000009'),
+('20000000-0000-0000-0000-00000000002c','904',4,300.00,'Suíte premium com varanda panorâmica.','https://www.queenkapiolani.com/files/4987/kapiolaniRoomsPremierOceanViewBalconyKing01.jpg','10000000-0000-0000-0000-000000000009'),
+('20000000-0000-0000-0000-00000000002d','905',2,200.00,'Quarto com atividades para crianças.','https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Focean-view-hotel-room&ved=0CBUQjRxqFwoTCNjc9JvWmpEDFQAAAAAdAAAAABA-&opi=89978449','10000000-0000-0000-0000-000000000009'),
 
 -- Accom 10 (rooms 1001-1005)
-('20000000-0000-0000-0000-00000000002e','1001',1,150.00,'Quarto boutique compacto e estiloso.','room_1001.jpg','10000000-0000-0000-0000-00000000000a'),
-('20000000-0000-0000-0000-00000000002f','1002',2,170.00,'Quarto duplo design exclusivo.','room_1002.jpg','10000000-0000-0000-0000-00000000000a'),
-('20000000-0000-0000-0000-000000000030','1003',2,190.00,'Suíte boutique com serviços personalizados.','room_1003.jpg','10000000-0000-0000-0000-00000000000a'),
-('20000000-0000-0000-0000-000000000031','1004',3,210.00,'Quarto loft para famílias pequenas.','room_1004.jpg','10000000-0000-0000-0000-00000000000a'),
-('20000000-0000-0000-0000-000000000032','1005',4,260.00,'Quarto com varanda privativa e café incluído.','room_1005.jpg','10000000-0000-0000-0000-00000000000a');
+('20000000-0000-0000-0000-00000000002e','1001',1,150.00,'Quarto boutique compacto e estiloso.','https://cms-asset.ayana.com/cdn-cgi/image/f=auto,q=85,width=1024/575x320_KMD_Room_FOV_Highlight4_cbbad9adae.jpg','10000000-0000-0000-0000-00000000000a'),
+('20000000-0000-0000-0000-00000000002f','1002',2,170.00,'Quarto duplo design exclusivo.','https://cms-asset.ayana.com/cdn-cgi/image/f=auto,q=85,width=1024/575x320_KMD_Room_FOV_Highlight3_60c32bb304.jpg','10000000-0000-0000-0000-00000000000a'),
+('20000000-0000-0000-0000-000000000030','1003',2,190.00,'Suíte boutique com serviços personalizados.','https://www.travelandleisure.com/thmb/JioqZXurmgjBU-aRjKthU7oKu8A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/1-71d7208a004a48b7bc1617a7e77183ea.jpg','10000000-0000-0000-0000-00000000000a'),
+('20000000-0000-0000-0000-000000000031','1004',3,210.00,'Quarto loft para famílias pequenas.','https://www.travelandleisure.com/thmb/BVXwxaCEyKbstCpScLm0tKPxuIE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/1-b76afaa92ebb4386b92ccd18395f5880.jpg','10000000-0000-0000-0000-00000000000a'),
+('20000000-0000-0000-0000-000000000032','1005',4,260.00,'Quarto com varanda privativa e café incluído.','https://www.coralbeachmyrtlebeachresort.com/wp-content/uploads/2022/02/Coral-Beach-OceanView-Queen-scaled.jpg','10000000-0000-0000-0000-00000000000a');
 
 -- =========================
 -- room_amenities (3 amenities por room)
