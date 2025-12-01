@@ -1,5 +1,7 @@
 package com.eden.bonvoyage.core.models.user;
 
+import com.eden.bonvoyage.core.models.reservation.Reservation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +36,9 @@ public class User implements UserDetails {
 
   @Column(nullable = false)
   private String password;
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Reservation> reservations;
 
   public User(String name, String email, String password) {
     this.name = name;

@@ -1,6 +1,7 @@
 package com.eden.bonvoyage.core.models.room;
 
 import com.eden.bonvoyage.core.models.accommodation.Accommodation;
+import com.eden.bonvoyage.core.models.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -59,4 +60,8 @@ public class Room {
       public final String name = accommodation.getName();
     };
   }
+
+  @JsonIgnore
+  @OneToMany(fetch = FetchType.LAZY)
+  private List<Reservation> reservations;
 }
