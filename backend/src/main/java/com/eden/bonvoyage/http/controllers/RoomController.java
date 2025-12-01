@@ -2,8 +2,10 @@ package com.eden.bonvoyage.http.controllers;
 
 import com.eden.bonvoyage.core.models.room.Room;
 import com.eden.bonvoyage.core.models.room.RoomFilter;
+import com.eden.bonvoyage.core.repository.RoomRepository;
 import com.eden.bonvoyage.core.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

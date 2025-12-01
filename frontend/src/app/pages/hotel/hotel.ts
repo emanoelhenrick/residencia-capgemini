@@ -2,13 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccommodationsService } from '../../services/accommodationsservice';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Room } from '../room/room';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-hotel',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, Room],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './hotel.html',
   styleUrl: './hotel.css',
 })
@@ -21,8 +20,7 @@ export class Hotel implements OnInit {
   constructor(
     private accommodationsService: AccommodationsService,
     private cdr: ChangeDetectorRef,
-    public bsModalRef: BsModalRef,
-    private modalService: BsModalService
+    public bsModalRef: BsModalRef
   ) {}
 
   ngOnInit(): void {
@@ -83,23 +81,5 @@ export class Hotel implements OnInit {
       }
     });
   }
-
-  abrirModalRoom(accommodation: any, room?: any): void {
-      const initialState: any = {
-        id: accommodation?.id,
-        accommodation,
-        rooms: accommodation?.rooms ?? []
-      };
   
-      if (room) {
-        initialState.room = room; // passa um quarto específico quando solicitado
-      }
-  
-      console.log('Abrindo Room modal com initialState:', initialState);
-      this.bsModalRef = this.modalService.show(Room, { initialState });
-  
-      setTimeout(() => {
-        this.cdr.detectChanges();
-      });
-    }
 }
