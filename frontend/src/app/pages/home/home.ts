@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Auth } from '../auth/auth';
 import { Accommodations } from '../accommodations/accommodations';
+import { Filter } from '../filter/filter';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Accommodations } from '../accommodations/accommodations';
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
   standalone: true,
-  imports: [Auth, Accommodations]
+  imports: [Auth, Accommodations, Filter]
 })
 export class Home {
   bsModalRef?: BsModalRef;
