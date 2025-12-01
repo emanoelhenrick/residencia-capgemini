@@ -1,4 +1,4 @@
-// reservation.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
@@ -50,8 +50,8 @@ export class ReservationService {
   private getHeaders(): HttpHeaders {
   const token = this.authService.getAccessToken();
   
-  console.log('🔐 getHeaders() - Token disponível:', !!token);
-  console.log('🔐 Token completo:', token);
+  console.log('getHeaders() - Token disponível:', !!token);
+  console.log('Token completo:', token);
   
   let headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export class ReservationService {
   if (token) {
     // Teste 1: Adicionar como Bearer
     headers = headers.set('Authorization', `Bearer ${token}`);
-    console.log('✅ Authorization header adicionado (Bearer)');
+    console.log('Authorization header adicionado (Bearer)');
     
     // Teste 2: Também adicionar como header customizado
     headers = headers.set('X-Auth-Token', token);
@@ -76,20 +76,20 @@ export class ReservationService {
 
   return headers;
 }
-  // ✅ Criar reserva
+ 
   createReservation(reservationData: Omit<ReservationRequest, 'userEmail'>): Observable<ReservationResponse> {
-    console.log('📝 Criando reserva...');
+    console.log('Criando reserva...');
     
     // Verificar autenticação
     if (!this.authService.isAuthenticated()) {
-      console.error('❌ Usuário não autenticado');
+      console.error('Usuário não autenticado');
       return throwError(() => new Error('Usuário não autenticado. Faça login para continuar.'));
     }
 
     // Obter email do usuário logado
     const currentUser = this.authService.getCurrentUser();
     if (!currentUser?.email) {
-      console.error('❌ Email do usuário não encontrado');
+      console.error('Email do usuário não encontrado');
       return throwError(() => new Error('Email do usuário não encontrado.'));
     }
 
@@ -101,11 +101,11 @@ export class ReservationService {
       finalDate: this.formatDateTime(reservationData.finalDate)
     };
 
-    console.log('📤 Dados da reserva:', formattedData);
-    console.log('📤 Headers:', this.getHeaders());
+    console.log('Dados da reserva:', formattedData);
+    console.log('Headers:', this.getHeaders());
     
       // DEBUG: Mostrar exatamente o que será enviado
-  console.log('🔍 DEBUG - Requisição completa:', {
+  console.log('DEBUG - Requisição completa:', {
     url: this.apiUrl,
     headers: Array.from(this.getHeaders().keys()).map(key => 
       `${key}: ${this.getHeaders().get(key)}`
@@ -124,7 +124,7 @@ export class ReservationService {
       }
     ).pipe(
       tap(response => {
-        console.log('✅ Reserva criada com sucesso!');
+        console.log('   Reserva criada com sucesso!');
         console.log('   Status:', response.status);
         console.log('   Status Text:', response.statusText);
         console.log('   Headers:', response.headers);
@@ -139,9 +139,9 @@ export class ReservationService {
     );
   }
 
-  // ✅ Tratamento de erros melhorado
+  
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('❌ ERRO NA REQUISIÇÃO:', {
+    console.error('ERRO NA REQUISIÇÃO:', {
       status: error.status,
       statusText: error.statusText,
       url: error.url,
@@ -176,20 +176,15 @@ export class ReservationService {
       errorMessage = 'Erro interno do servidor. Tente novamente mais tarde.';
     }
 
-    console.error('❌ Mensagem de erro para o usuário:', errorMessage);
+    console.error('Mensagem de erro para o usuário:', errorMessage);
     return throwError(() => new Error(errorMessage));
   }
 
-  // ✅ Formatar data para ISO 8601
+ 
   private formatDateTime(dateString: string): string {
     if (!dateString) return '';
     
-    // // Se já for ISO, retornar como está
-    // if (dateString.includes('T')) {
-    //   return dateString;
-    // }
-    
-    // Converter para Date
+
     const date = new Date(dateString);
     
     // Adicionar horário padrão (meio-dia)
@@ -197,17 +192,15 @@ export class ReservationService {
     return date.toISOString().slice(0, 19);
   }
 
-  // ✅ Verificar se usuário está autenticado
+ 
   isUserAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
 
-  // ✅ Obter email do usuário atual
   getCurrentUserEmail(): string | null {
     return this.authService.getCurrentUser()?.email || null;
   }
 
-  // ✅ Outros métodos (se necessário)
   getUserReservations(): Observable<ReservationResponse[]> {
     const userEmail = this.getCurrentUserEmail();
     if (!userEmail) {
