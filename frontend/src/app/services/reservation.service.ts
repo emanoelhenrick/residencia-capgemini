@@ -40,7 +40,7 @@ export interface ReservationResponse {
   providedIn: 'root'
 })
 export class ReservationService {
-  private apiUrl = 'http://localhost:8080/reservations';
+  private apiUrl = 'http://localhost:8080/reservation';
 
   constructor(
     private http: HttpClient,
@@ -184,20 +184,17 @@ export class ReservationService {
   private formatDateTime(dateString: string): string {
     if (!dateString) return '';
     
-    // Se já for ISO, retornar como está
-    if (dateString.includes('T')) {
-      return dateString;
-    }
+    // // Se já for ISO, retornar como está
+    // if (dateString.includes('T')) {
+    //   return dateString;
+    // }
     
     // Converter para Date
     const date = new Date(dateString);
-    if (isNaN(date.getTime())) {
-      return dateString;
-    }
     
     // Adicionar horário padrão (meio-dia)
     date.setHours(12, 0, 0, 0);
-    return date.toISOString();
+    return date.toISOString().slice(0, 19);
   }
 
   // ✅ Verificar se usuário está autenticado
