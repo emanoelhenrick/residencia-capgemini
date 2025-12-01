@@ -1,4 +1,4 @@
-package com.eden.bonvoyage.http.controllers.auth;
+package com.eden.bonvoyage.http.controllers;
 
 import com.eden.bonvoyage.core.models.user.AuthDTO;
 import com.eden.bonvoyage.core.models.user.LoginResponseDTO;

@@ -1,0 +1,29 @@
+package com.eden.bonvoyage.http.controllers;
+
+import com.eden.bonvoyage.core.models.room.Room;
+import com.eden.bonvoyage.core.models.room.RoomFilter;
+import com.eden.bonvoyage.core.services.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/room")
+public class RoomController {
+
+  @Autowired
+  RoomService roomService;
+
+  @PostMapping
+  List<Room> findFilter(@RequestBody RoomFilter filter) {
+    if  (filter == null) return roomService.findAll();
+    return roomService.findByFilters(filter);
+  }
+
+  @GetMapping
+  List<Room> findAll() {
+    return roomService.findAll();
+  }
+
+}

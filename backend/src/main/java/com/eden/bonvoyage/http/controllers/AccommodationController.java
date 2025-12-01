@@ -1,4 +1,4 @@
-package com.eden.bonvoyage.http.controllers.Accommodation;
+package com.eden.bonvoyage.http.controllers;
 
 import com.eden.bonvoyage.core.models.accommodation.Accommodation;
 import com.eden.bonvoyage.core.services.AccommodationService;

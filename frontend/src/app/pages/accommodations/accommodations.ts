@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccommodationsService } from '../../services/accommodationsservice';
+import { FilteredRoomsService } from '../../services/filteredrooms.service';
 import { LucideAngularModule } from 'lucide-angular';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Room } from '../room/room';
@@ -15,16 +16,28 @@ import { Room } from '../room/room';
 export class Accommodations implements OnInit {
   public response: any[] = [];
   public roomsList: any[] = [];
+  public displayedRooms: any[] = [];
   bsModalRef?: BsModalRef;
 
   constructor(
     private accommodationsService: AccommodationsService,
+    private filteredRoomsService: FilteredRoomsService,
     private cdr: ChangeDetectorRef,
     private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
     this.fetchAccommodations();
+    
+    // Escutar mudanças nos quartos filtrados
+    this.filteredRoomsService.filteredRooms$.subscribe((filteredRooms) => {
+      if (filteredRooms && filteredRooms.length > 0) {
+        this.displayedRooms = filteredRooms;
+      } else {
+        this.displayedRooms = this.roomsList;
+      }
+      this.cdr.detectChanges();
+    });
   }
 
   public fetchAccommodations(): void {
@@ -40,6 +53,8 @@ export class Accommodations implements OnInit {
             this.roomsList.push({ ...r, accommodation: acc });
           }
         }
+        // Inicializar com todos os quartos
+        this.displayedRooms = this.roomsList;
         console.log('Array de acomodações:', this.response);
         console.log('Lista de quartos (achatada):', this.roomsList);
         this.cdr.detectChanges();
