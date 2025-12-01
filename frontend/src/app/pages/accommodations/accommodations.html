@@ -1,13 +1,13 @@
 <div class="accommodations">
   <div class="text_accommodate">
     <h2>Quartos Disponíveis</h2>
-    <p>{{ displayedRooms.length }} quartos Disponíveis</p>
+    <p>{{ quantItens() }} quartos Disponíveis</p>
   </div>
 
   <div class="objects_accommodate">
     
-    <div *ngFor="let room of displayedRooms" class="room-card">
-      <img [src]="room.img || room.accommodation?.img" alt="Imagem do quarto" />
+    <div *ngFor="let room of roomsList" class="room-card">
+      <img [src]="room.img || room.accommodation?.img" alt="Imagem do quarto"  />
       <h3>Quarto {{ room.number }} — {{ room.accommodation?.name }}</h3>
       <p>{{ room.description }}</p>
 
@@ -20,7 +20,10 @@
         <div class="room-actions">
           <button (click)="abrirModalRoom(room.accommodation, room)">Ver Detalhes</button>
         </div>
+          <button class="btn-reserve" (click)="abrirModalReserva(room.accommodation, room)">
+           Reservar Agora
+          </button>
       </div>
     </div>
   </div>
-</div>
+</div>s

@@ -4,11 +4,12 @@ import { LucideAngularModule } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Hotel } from '../hotel/hotel';
+import { Reservation } from '../reservation/reservation';
 
 @Component({
   selector: 'app-room',
   standalone: true,
-  imports: [LucideAngularModule, CommonModule, Hotel],
+  imports: [LucideAngularModule, CommonModule, Hotel, Reservation],
   templateUrl: './room.html',
   styleUrls: ['./room.css'],
 })
@@ -135,6 +136,20 @@ export class Room implements OnInit {
         class: 'modal-lg'
       });
     }
+  });
+}
+
+  // accommodations.ts - adicione este método
+abrirModalReserva(accommodation: any, room: any): void {
+  const initialState = {
+    accommodation: accommodation,
+    room: room
+  };
+
+  console.log('Abrindo modal de reserva:', initialState);
+  this.bsModalRef = this.modalService.show(Reservation, { 
+    initialState,
+    class: 'modal-lg'
   });
 }
 }

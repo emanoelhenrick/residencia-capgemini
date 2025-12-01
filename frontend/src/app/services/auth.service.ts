@@ -1,7 +1,8 @@
+// auth.service.ts
 import { Injectable, Inject } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { map, switchMap, tap, catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { map, tap, catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_BASE_URL } from '../app.config';
 
 export interface AuthUser {
@@ -9,216 +10,236 @@ export interface AuthUser {
   name?: string;
   email: string;
   role?: string;
-  exp?: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly ACCESS_KEY = 'access_token';
-  private readonly REFRESH_KEY = 'refresh_token';
-  private readonly TOKEN_KEY = 'token'; // Para compatibilidade
+  private readonly USER_KEY = 'current_user';
 
-  private user$ = new BehaviorSubject<AuthUser | null>(this.loadUser());
+  private user$ = new BehaviorSubject<AuthUser | null>(null);
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, @Inject(API_BASE_URL) private apiBase: string) {
-    console.log('🔧 AuthService inicializado com base URL:', this.apiBase);
+    this.loadUserFromStorage();
   }
 
-  login(email: string, password: string): Observable<boolean> {
-    console.log('🔐 Tentando login em:', `${this.apiBase}/login`);
+  // ✅ Carregar usuário do localStorage
+  private loadUserFromStorage(): void {
+    const token = localStorage.getItem(this.ACCESS_KEY);
+    const userStr = localStorage.getItem(this.USER_KEY);
     
-    return this.http.post<{ token?: string; accessToken?: string }>(
-        `${this.apiBase}/login`,
-        { email, password },
-        { withCredentials: true }
-      )
+    if (token && userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        console.log('👤 Usuário carregado do storage:', user);
+        
+        // Verificar se o token ainda é válido
+        if (this.isTokenValid(token)) {
+          this.user$.next(user);
+          this.scheduleTokenExpirationCheck(token);
+        } else {
+          console.log('⚠️ Token expirado, limpando...');
+          this.clearStorage();
+        }
+      } catch (error) {
+        console.error('❌ Erro ao carregar usuário:', error);
+        this.clearStorage();
+      }
+    }
+  }
+
+  // ✅ Login
+  login(email: string, password: string): Observable<boolean> {
+    console.log('🔐 Login para:', email);
+    
+    return this.http.post<any>(`${this.apiBase}/login`, { email, password })
       .pipe(
-        tap((res) => {
-          // Suporte para diferentes formatos de resposta
-          const token = res.token || res.accessToken;
-          if (token) {
-            localStorage.setItem(this.ACCESS_KEY, token);
-            localStorage.setItem(this.TOKEN_KEY, token); // Para compatibilidade
-            console.log('✅ Token armazenado:', token.substring(0, 20) + '...');
-            this.user$.next(this.decodeToken(token));
-          } else {
-            console.warn('⚠️ Nenhum token recebido na resposta:', res);
+        tap(response => {
+          console.log('✅ Resposta do login:', response);
+          
+          const token = response.token || response.accessToken;
+          if (!token) {
+            throw new Error('Token não recebido do servidor');
           }
+          
+          // Salvar token
+          localStorage.setItem(this.ACCESS_KEY, token);
+          console.log('✅ Token salvo');
+          
+          // Extrair ou obter usuário
+          let user: AuthUser;
+          if (response.user) {
+            user = response.user;
+          } else {
+            user = this.extractUserFromToken(token);
+            user.email = email; // Garantir que o email está correto
+          }
+          
+          // Salvar usuário
+          localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+          this.user$.next(user);
+          console.log('✅ Usuário salvo:', user);
+          
+          // Agendar verificação de expiração
+          this.scheduleTokenExpirationCheck(token);
         }),
         map(() => true),
-        catchError((err) => {
-          console.error('❌ Erro no login:', err);
-          alert('❌ Erro no login: ' + (err.error?.message || err.message));
-          return throwError(() => err);
+        catchError(error => {
+          console.error('❌ Erro no login:', error);
+          return throwError(() => error);
         })
       );
   }
 
+  // ✅ Extrair usuário do token JWT
+  private extractUserFromToken(token: string): AuthUser {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log('🔍 Payload do token:', payload);
+      
+      return {
+        id: payload.sub || payload.id || '1',
+        email: payload.sub || payload.email || '',
+        name: payload.name || payload.sub?.split('@')[0] || 'Usuário',
+        role: payload.role || payload.authorities?.[0] || 'USER'
+      };
+    } catch (error) {
+      console.error('❌ Erro ao extrair usuário do token:', error);
+      return {
+        id: '1',
+        email: '',
+        name: 'Usuário',
+        role: 'USER'
+      };
+    }
+  }
+
+  // ✅ Verificar se o token é válido
+  isTokenValid(token?: string): boolean {
+    const tokenToCheck = token || this.getAccessToken();
+    if (!tokenToCheck) return false;
+    
+    try {
+      const payload = JSON.parse(atob(tokenToCheck.split('.')[1]));
+      const exp = payload.exp * 1000;
+      const now = Date.now();
+      const isValid = now < exp;
+      
+      console.log('🔍 Validação do token:', {
+        expiraEm: new Date(exp).toLocaleString(),
+        agora: new Date(now).toLocaleString(),
+        valido: isValid,
+        expiradoEm: Math.round((exp - now) / 60000) + ' minutos'
+      });
+      
+      return isValid;
+    } catch {
+      return false;
+    }
+  }
+
+  // ✅ Agendar verificação de expiração
+  private scheduleTokenExpirationCheck(token: string): void {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const exp = payload.exp * 1000;
+      const now = Date.now();
+      const timeUntilExpiration = exp - now;
+      
+      // Limpar timer anterior
+      if (this.tokenExpirationTimer) {
+        clearTimeout(this.tokenExpirationTimer);
+      }
+      
+      // Agendar verificação 1 minuto antes da expiração
+      if (timeUntilExpiration > 60000) {
+        this.tokenExpirationTimer = setTimeout(() => {
+          console.log('⚠️ Token prestes a expirar');
+          if (!this.isTokenValid()) {
+            this.clearStorage();
+          }
+        }, timeUntilExpiration - 60000);
+      }
+    } catch (error) {
+      console.error('❌ Erro ao agendar verificação do token:', error);
+    }
+  }
+
+  // ✅ Verificar autenticação
+  isAuthenticated(): boolean {
+    const token = this.getAccessToken();
+    const user = this.getCurrentUser();
+    const tokenValid = token ? this.isTokenValid(token) : false;
+    
+    const result = !!token && !!user && tokenValid;
+    
+    console.log('🔐 isAuthenticated:', {
+      result,
+      temToken: !!token,
+      temUsuario: !!user,
+      tokenValido: tokenValid
+    });
+    
+    return result;
+  }
+
+  // ✅ Logout
   logout(): Observable<any> {
-    return this.http.post(`${this.apiBase}/logout`, {}, { withCredentials: true }).pipe(
+    const token = this.getAccessToken();
+    const headers = token ? new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    }) : new HttpHeaders();
+    
+    return this.http.post(`${this.apiBase}/logout`, {}, { headers }).pipe(
       tap(() => {
-        this.clearAuthData();
-        this.user$.next(null);
-        console.log('🚪 Logout realizado');
+        console.log('✅ Logout no backend bem-sucedido');
+        this.clearStorage();
       }),
-      catchError((err) => {
-        console.error('❌ Erro no logout:', err);
-        this.clearAuthData(); // Limpa mesmo com erro
-        return throwError(() => err);
+      catchError(error => {
+        console.warn('⚠️ Erro no logout do backend, limpando localmente:', error);
+        this.clearStorage();
+        return of(null);
       })
     );
   }
 
-  register(name: string, email: string, password: string, role: string): Observable<boolean> {
-    console.log('📝 Tentando registro em:', `${this.apiBase}/register`);
-    return this.http
-      .post<{ success: boolean; token?: string; accessToken?: string }>(
-        `${this.apiBase}/register`, 
-        { name, email, password, role }, 
-        { withCredentials: true }
-      )
-      .pipe(
-        tap((res) => {
-          // Também processa token no registro, se fornecido
-          const token = res.token || res.accessToken;
-          if (token) {
-            localStorage.setItem(this.ACCESS_KEY, token);
-            localStorage.setItem(this.TOKEN_KEY, token);
-            this.user$.next(this.decodeToken(token));
-          }
-        }),
-        map(() => true),
-        catchError((err) => {
-          console.error('❌ Erro no registro:', err);
-          return throwError(() => err);
-        })
-      );
+  // ✅ Limpar storage
+  private clearStorage(): void {
+    console.log('🧹 Limpando storage...');
+    localStorage.removeItem(this.ACCESS_KEY);
+    localStorage.removeItem(this.USER_KEY);
+    this.user$.next(null);
+    
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    
+    console.log('✅ Storage limpo');
   }
 
-  isAuthenticated(): boolean {
-    const token = this.getAccessToken();
-    if (!token) return false;
-
-    // Verifica se o token está expirado
-    try {
-      const payload = this.decodeToken(token);
-      if (payload && payload.exp) {
-        const isExpired = Date.now() >= payload.exp * 1000;
-        if (isExpired) {
-          console.warn('⚠️ Token expirado');
-          this.clearAuthData();
-          return false;
-        }
-        return true;
-      }
-    } catch (e) {
-      console.error('❌ Erro ao decodificar token:', e);
-      this.clearAuthData();
-      return false;
-    }
-
-    return !!token;
+  // ✅ Getters
+  getCurrentUser(): AuthUser | null {
+    return this.user$.value;
   }
 
   getAccessToken(): string | null {
-    // Tenta múltiplas chaves para compatibilidade
-    const token = localStorage.getItem(this.ACCESS_KEY) || 
-                  localStorage.getItem(this.TOKEN_KEY);
-    
-    console.log('🔍 Buscando token:', token ? token.substring(0, 20) + '...' : 'null');
-    return token;
-  }
-
-  refreshToken(): Observable<boolean> {
-    console.log('🔄 Tentando refresh token...');
-    return this.http.post<{ accessToken?: string; token?: string }>(
-      `${this.apiBase}/refresh`, 
-      {}, 
-      { withCredentials: true }
-    ).pipe(
-      tap((res) => {
-        const newToken = res.accessToken || res.token;
-        if (newToken) {
-          localStorage.setItem(this.ACCESS_KEY, newToken);
-          localStorage.setItem(this.TOKEN_KEY, newToken);
-          this.user$.next(this.decodeToken(newToken));
-          console.log('✅ Token atualizado:', newToken.substring(0, 20) + '...');
-        } else {
-          console.warn('⚠️ Nenhum token recebido no refresh');
-        }
-      }),
-      map(() => true),
-      catchError((err) => {
-        console.error('❌ Erro no refresh token:', err);
-        this.clearAuthData();
-        return throwError(() => err);
-      })
-    );
+    return localStorage.getItem(this.ACCESS_KEY);
   }
 
   getUser$(): Observable<AuthUser | null> {
     return this.user$.asObservable();
   }
 
-  getCurrentUser(): AuthUser | null {
-    return this.user$.value;
-  }
-
-  // Decodifica token JWT
-  private decodeToken(token: string): AuthUser | null {
-    try {
-      const payload = token.split('.')[1];
-      const decoded = JSON.parse(atob(payload));
-      console.log('🔓 Token decodificado:', decoded);
-      
-      return {
-        id: decoded.sub || decoded.id || '1',
-        email: decoded.email || decoded.sub || 'user@example.com',
-        name: decoded.name || decoded.username || 'Usuário',
-        role: decoded.role,
-        exp: decoded.exp
-      };
-    } catch (error) {
-      console.error('❌ Erro ao decodificar token:', error);
-      return null;
-    }
-  }
-
-  private loadUser(): AuthUser | null {
-    const token = this.getAccessToken();
-    if (!token) return null;
-    
-    return this.decodeToken(token);
-  }
-
-  private clearAuthData(): void {
-    localStorage.removeItem(this.ACCESS_KEY);
-    localStorage.removeItem(this.REFRESH_KEY);
-    localStorage.removeItem(this.TOKEN_KEY);
-    console.log('🧹 Dados de autenticação removidos');
-  }
-
-  // Método para debug
-  debugAuth(): void {
-    const token = this.getAccessToken();
-    console.log('🐛 Debug AuthService:');
-    console.log('   Token exists:', !!token);
-    console.log('   Token length:', token?.length);
-    console.log('   Is authenticated:', this.isAuthenticated());
-    console.log('   Current user:', this.getCurrentUser());
-    console.log('   All localStorage:', Object.keys(localStorage));
-    
-    if (token) {
-      try {
-        const payload = this.decodeToken(token);
-        console.log('   Token payload:', payload);
-        if (payload?.exp) {
-          console.log('   Token expires:', new Date(payload.exp * 1000));
-          console.log('   Is expired:', Date.now() >= payload.exp * 1000);
-        }
-      } catch (e) {
-        console.log('   Token invalid');
-      }
-    }
+  // ✅ Register (se necessário)
+  register(name: string, email: string, password: string, role: string = 'HOST'): Observable<boolean> {
+    return this.http.post<any>(`${this.apiBase}/register`, { name, email, password, role })
+      .pipe(
+        map(() => true),
+        catchError(error => {
+          console.error('❌ Erro no registro:', error);
+          return throwError(() => error);
+        })
+      );
   }
 }

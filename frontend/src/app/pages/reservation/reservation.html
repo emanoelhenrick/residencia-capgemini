@@ -1,0 +1,286 @@
+<div class="reservation-modal">
+  <!-- Cabeçalho com status de autenticação -->
+  <div class="reservation-header">
+    <h2>{{ accommodation?.name || 'Hotel Boutique' }}</h2>
+    <p>{{ accommodation?.location || 'Lisboa, Portugal' }}</p>
+    <div *ngIf="authService && authService.isAuthenticated()" class="user-info">
+      <lucide-icon name="users" size="16"></lucide-icon>
+      <span>Reservando como {{ (authService.getCurrentUser()?.name || authService.getCurrentUser()?.email || 'Usuário') }}</span>
+    </div>
+  <!-- Progresso -->
+  <div class="reservation-progress">
+    <div class="steps">
+      <div *ngFor="let step of steps; let i = index" 
+           [class.active]="currentStep === i + 1"
+           [class.completed]="currentStep > i + 1"
+           class="step">
+        <div class="step-circle">{{ i + 1 }}</div>
+        <span class="step-label">{{ step }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="reservation-content">
+    <div class="main-content">
+      <!-- Passo 1: Datas -->
+      <div *ngIf="currentStep === 1" class="step-content">
+        <h3>Selecione as datas</h3>
+        
+        <div class="date-selection">
+          <div class="date-input-group">
+            <label>Check-in</label>
+            <div class="date-input" (click)="checkInCalendar = true; checkOutCalendar = false">
+              <lucide-icon name="calendar" size="16"></lucide-icon>
+              <span>{{ reservationData.checkIn || 'Selecione uma data' }}</span>
+            </div>
+          </div>
+          
+          <div class="date-input-group">
+            <label>Check-out</label>
+            <div class="date-input" (click)="checkOutCalendar = true; checkInCalendar = false">
+              <lucide-icon name="calendar" size="16"></lucide-icon>
+              <span>{{ reservationData.checkOut || 'Selecione uma data' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendário -->
+        <div *ngIf="checkInCalendar || checkOutCalendar" class="calendar-popup">
+          <div class="calendar">
+            <div class="calendar-header">
+              <button type="button" (click)="prevMonth()">‹</button>
+              <span>{{ getMonthName(currentMonth) }}</span>
+              <button type="button" (click)="nextMonth()">›</button>
+            </div>
+            
+            <div class="calendar-grid">
+              <div class="weekday" *ngFor="let day of ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']">
+                {{ day }}
+              </div>
+              
+              <div *ngFor="let day of getDaysInMonth(currentMonth.getFullYear(), currentMonth.getMonth())"
+                   [class]="getDayClass(day)"
+                   (click)="selectDate(day)">
+                {{ day.getDate() }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seleção de hóspedes no passo 1 -->
+        <div class="guests-selection" *ngIf="reservationData.checkIn && reservationData.checkOut">
+          <h4>Número de hóspedes</h4>
+          <div class="guests-selector">
+            <button type="button" (click)="decrementGuests()" 
+                    [disabled]="reservationData.guests <= 1">
+              <lucide-icon name="minus" size="16"></lucide-icon>
+            </button>
+            <span>{{ reservationData.guests }} pessoa{{ reservationData.guests > 1 ? 's' : '' }}</span>
+            <button type="button" (click)="incrementGuests()"
+                    [disabled]="reservationData.guests >= (room?.capacity || 4)">
+              <lucide-icon name="plus" size="16"></lucide-icon>
+            </button>
+          </div>
+          <small class="capacity-info">Máximo: {{ room?.capacity || 4 }} pessoas</small>
+        </div>
+      </div>
+
+      <!-- Passo 2: Hóspedes -->
+      <div *ngIf="currentStep === 2" class="step-content">
+        <h3>Informações do hóspede</h3>
+        
+        <div class="form-group">
+          <label for="guestEmail">Email *</label>
+          <input 
+            type="email" 
+            id="guestEmail"
+            [(ngModel)]="reservationData.guestEmail" 
+            placeholder="seu@email.com"
+            [readonly]="true"
+            [style.background]="'#f5f5f5'"
+            required>
+          <small>Usando o email da sua conta</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="guestName">Nome completo *</label>
+          <input 
+            type="text" 
+            id="guestName"
+            [(ngModel)]="reservationData.guestName" 
+            placeholder="Seu nome completo"
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="guestPhone">Telefone *</label>
+          <input 
+            type="tel" 
+            id="guestPhone"
+            [(ngModel)]="reservationData.guestPhone" 
+            (input)="formatPhone($event)"
+            placeholder="(11) 99999-9999"
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="specialRequests">Pedidos especiais (opcional)</label>
+          <textarea 
+            id="specialRequests"
+            [(ngModel)]="reservationData.specialRequests" 
+            placeholder="Alguma preferência ou requisito especial..."
+            rows="3"></textarea>
+        </div>
+      </div>
+
+      <!-- Passo 3: Confirmação -->
+      <div *ngIf="currentStep === 3" class="step-content">
+        <h3>Confirme sua reserva</h3>
+        
+        <div class="confirmation-details">
+          <div class="detail-section">
+            <h4>Detalhes da Reserva</h4>
+            <div class="detail-row">
+              <span>Check-in:</span>
+              <strong>{{ formatBrazilianDate(reservationData.checkIn) }}</strong>
+            </div>
+            <div class="detail-row">
+              <span>Check-out:</span>
+              <strong>{{ formatBrazilianDate(reservationData.checkOut) }}</strong>
+            </div>
+            <div class="detail-row">
+              <span>Duração:</span>
+              <strong>{{ totalNights }} noite{{ totalNights > 1 ? 's' : '' }}</strong>
+            </div>
+            <div class="detail-row">
+              <span>Hóspedes:</span>
+              <strong>{{ reservationData.guests }} pessoa{{ reservationData.guests > 1 ? 's' : '' }}</strong>
+            </div>
+          </div>
+          
+          <div class="detail-section">
+            <h4>Dados do Hóspede</h4>
+            <div class="guest-info">
+              <p><strong>{{ reservationData.guestName }}</strong></p>
+              <p>{{ reservationData.guestEmail }}</p>
+              <p>{{ reservationData.guestPhone }}</p>
+              <p *ngIf="reservationData.specialRequests" class="special-requests">
+                <strong>Observações:</strong> {{ reservationData.specialRequests }}
+              </p>
+            </div>
+          </div>
+          
+          <div class="detail-section">
+            <h4>Resumo de Preços</h4>
+            <div class="price-row">
+              <span>{{ formatCurrency(room?.pricePerNight || 250) }} × {{ totalNights }} noites</span>
+              <span>{{ formatCurrency(roomTotal) }}</span>
+            </div>
+            <div class="price-row">
+              <span>Taxa de serviço (10%)</span>
+              <span>{{ formatCurrency(serviceFee) }}</span>
+            </div>
+            <div class="price-total">
+              <span>Total</span>
+              <strong>{{ formatCurrency(totalAmount) }}</strong>
+            </div>
+          </div>
+          
+          <div class="payment-method">
+            <h4>Forma de Pagamento</h4>
+            <label class="payment-option">
+              <input type="radio" 
+                     name="payment" 
+                     value="on_site" 
+                     [(ngModel)]="reservationData.paymentMethod" 
+                     checked>
+              <div class="payment-content">
+                <span class="payment-title">Pagamento no local</span>
+                <small>O pagamento será realizado diretamente na propriedade.</small>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumo lateral -->
+    <div class="reservation-summary">
+      <div class="summary-card">
+        <div class="summary-image">
+          <img [src]="room?.img || accommodation?.img || 'assets/default-room.jpg'" 
+               alt="Quarto {{ room?.number }}">
+        </div>
+        <div class="summary-content">
+          <h4>Quarto {{ room?.number }}</h4>
+          <p class="accommodation-name">{{ accommodation?.name }}</p>
+          
+          <div class="summary-dates">
+            <div class="date-item">
+              <small>Check-in</small>
+              <p class="date-value">{{ getShortDate(reservationData.checkIn) || '--' }}</p>
+            </div>
+            <div class="date-item">
+              <small>Check-out</small>
+              <p class="date-value">{{ getShortDate(reservationData.checkOut) || '--' }}</p>
+            </div>
+            <div class="date-item">
+              <small>Noites</small>
+              <p class="date-value">{{ totalNights || '--' }}</p>
+            </div>
+          </div>
+          
+          <div class="summary-total">
+            <div class="price-breakdown">
+              <span>{{ formatCurrency(room?.pricePerNight || 250) }} × {{ totalNights }} noites</span>
+              <span>{{ formatCurrency(roomTotal) }}</span>
+            </div>
+            <div class="price-total">
+              <strong>Total</strong>
+              <strong>{{ formatCurrency(totalAmount) }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="summary-info">
+        <p><lucide-icon name="info" size="14"></lucide-icon> Cancelamento gratuito até 48h antes do check-in</p>
+        <p><lucide-icon name="wifi" size="14"></lucide-icon> Wi-Fi gratuito</p>
+        <p><lucide-icon name="coffee" size="14"></lucide-icon> Café da manhã incluso</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botões de navegação -->
+  <div class="reservation-actions">
+    <button *ngIf="currentStep > 1" 
+            type="button" 
+            class="btn-secondary" 
+            (click)="prevStep()">
+      <lucide-icon name="arrow-left" size="16"></lucide-icon>
+      Voltar
+    </button>
+    
+    <div class="actions-right">
+      <button *ngIf="currentStep < 3" 
+              type="button" 
+              class="btn-primary" 
+              (click)="nextStep()" 
+              [disabled]="!isStepValid()">
+        Continuar
+        <lucide-icon name="arrow-right" size="16"></lucide-icon>
+      </button>
+      
+      <button *ngIf="currentStep === 3" 
+              type="button" 
+              class="btn-confirm" 
+              (click)="confirmReservation()"
+              [disabled]="loading || !isStepValid()">
+        <lucide-icon name="check" size="16"></lucide-icon>
+        <span *ngIf="loading">Processando...</span>
+        <span *ngIf="!loading">Confirmar Reserva</span>
+      </button>
+    </div>
+  </div>
+</div>
