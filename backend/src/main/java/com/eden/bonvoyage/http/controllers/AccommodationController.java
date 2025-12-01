@@ -23,7 +23,7 @@ public class AccommodationController {
   }
 
   @GetMapping("/{id}")
-  List<Accommodation> findAll(@PathVariable String id) {
+  Accommodation findAll(@PathVariable String id) {
     return accommodationService.findById(id);
   }
 
