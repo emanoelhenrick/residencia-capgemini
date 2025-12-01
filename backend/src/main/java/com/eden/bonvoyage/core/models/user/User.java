@@ -1,7 +1,6 @@
 package com.eden.bonvoyage.core.models.user;
 
 import com.eden.bonvoyage.core.models.reservation.Reservation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
