@@ -1,8 +1,7 @@
 # Projeto: Sistema de Reserva e Roteiro de Viagem com IA
 
 ## 1. Descrição do Projeto
-Este projeto consiste em um sistema para reserva de quartos em hotéis que também atua como um gerador de roteiros de viagem personalizados utilizando Inteligência Artificial. O objetivo é facilitar o planejamento de viagens, combinando a seleção de hospedagem com a criação de um itinerário customizado, tudo em uma única plataforma.
-
+Este projeto consiste em um sistema para reserva de quartos em hotéis.
 ## 2. Cargos do Grupo
 A equipe do projeto é composta pelos seguintes membros e suas respectivas funções:
 
