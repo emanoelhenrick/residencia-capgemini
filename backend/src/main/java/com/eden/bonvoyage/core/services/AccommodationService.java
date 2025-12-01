@@ -18,12 +18,10 @@ public class AccommodationService {
     return accommodationRepository.findAll();
   }
 
-  public List<Accommodation> findById(String id) {
+  public Accommodation findById(String id) {
     return accommodationRepository
       .findById(UUID.fromString(id))
-      .stream().toList();
+      .orElseThrow(() -> new RuntimeException("Accommodation not found"));
   }
-
-
 
 }
