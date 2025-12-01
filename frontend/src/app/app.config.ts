@@ -5,7 +5,35 @@ import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AUTH_INTERCEPTOR_PROVIDER } from './interceptors/auth.interceptor';
-import { LucideAngularModule, Users, Bed, Bath } from 'lucide-angular';
+import {   LucideAngularModule, 
+  Users, 
+  Bed, 
+  Bath, 
+  Calendar,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Search,
+  Filter,
+  Download,
+  Building,
+  DoorClosed,
+  Moon,
+  Euro,
+  Eye,
+  Edit,
+  AlertCircle,
+  RefreshCw,
+  Compass,
+  Info,
+  Wifi,
+  Coffee,
+  ArrowRight,
+  ArrowLeft,
+  Check,
+  X,
+  Plus,
+  Minus } from 'lucide-angular';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
@@ -18,8 +46,33 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
           LucideAngularModule.pick({ 
             Users, 
-            Bed, 
-            Bath
+        Bed, 
+        Bath,
+        Calendar,
+        CheckCircle,
+        XCircle,
+        Clock,
+        Search,
+        Filter,
+        Download,
+        Building,
+        DoorClosed,
+        Moon,
+        Euro,
+        Eye,
+        Edit,
+        AlertCircle,
+        RefreshCw,
+        Compass,
+        Info,
+        Wifi,
+        Coffee,
+        ArrowRight,
+        ArrowLeft,
+        Check,
+        X,
+        Plus,
+        Minus
           })
         ),
     BsModalService,
