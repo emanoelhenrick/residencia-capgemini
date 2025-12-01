@@ -1,0 +1,41 @@
+services:
+  bonvoyage-db:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=bonvoyage-db
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    container_name: spring_backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://bonvoyage-db:5432/bonvoyage-db
+
+      SPRING_DATASOURCE_USERNAME: docker
+      SPRING_DATASOURCE_PASSWORD: docker
+      JWT_SECRET: GENDEN_ULTIMATE_SECRET_KEY
+    ports:
+      - "8080:8080"
+    depends_on:
+      - bonvoyage-db
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: angular_frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
