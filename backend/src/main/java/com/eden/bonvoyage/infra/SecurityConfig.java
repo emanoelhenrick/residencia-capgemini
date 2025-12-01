@@ -26,12 +26,13 @@ public class SecurityConfig {
     return httpSecurity
       .csrf(csrf -> csrf.disable())
       .cors(cors -> {})
+      .formLogin(form -> form.disable())
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
         .requestMatchers(HttpMethod.GET, "/accommodation/**").permitAll()
-        .requestMatchers(HttpMethod.POST, "/hotel").hasRole("ADMIN")
+        .requestMatchers(HttpMethod.GET, "/room/**").permitAll()
         .anyRequest().authenticated()
       )
       .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
