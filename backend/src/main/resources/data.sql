@@ -81,12 +81,12 @@ INSERT INTO room (id, number, capacity, price_per_night, description, img, accom
 ('20000000-0000-0000-0000-00000000002a','902',3,260.00,'Suíte família com clube infantil.','https://rusticinnatjh.com/wp-content/uploads/2018/03/Deluxe-King-primary-1-1024x654.jpg','10000000-0000-0000-0000-000000000009'),
 ('20000000-0000-0000-0000-00000000002b','903',1,140.00,'Single com acesso ao spa.','https://cdn.homedit.com/wp-content/uploads/2019/01/Madonna-di-Campiglio-long-room.jpg','10000000-0000-0000-0000-000000000009'),
 ('20000000-0000-0000-0000-00000000002c','904',4,300.00,'Suíte premium com varanda panorâmica.','https://www.queenkapiolani.com/files/4987/kapiolaniRoomsPremierOceanViewBalconyKing01.jpg','10000000-0000-0000-0000-000000000009'),
-('20000000-0000-0000-0000-00000000002d','905',2,200.00,'Quarto com atividades para crianças.','https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Focean-view-hotel-room&ved=0CBUQjRxqFwoTCNjc9JvWmpEDFQAAAAAdAAAAABA-&opi=89978449','10000000-0000-0000-0000-000000000009'),
+('20000000-0000-0000-0000-00000000002d','905',2,200.00,'Quarto com atividades para crianças.','https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg','10000000-0000-0000-0000-000000000009'),
 
 -- Accom 10 (rooms 1001-1005)
 ('20000000-0000-0000-0000-00000000002e','1001',1,150.00,'Quarto boutique compacto e estiloso.','https://cms-asset.ayana.com/cdn-cgi/image/f=auto,q=85,width=1024/575x320_KMD_Room_FOV_Highlight4_cbbad9adae.jpg','10000000-0000-0000-0000-00000000000a'),
 ('20000000-0000-0000-0000-00000000002f','1002',2,170.00,'Quarto duplo design exclusivo.','https://cms-asset.ayana.com/cdn-cgi/image/f=auto,q=85,width=1024/575x320_KMD_Room_FOV_Highlight3_60c32bb304.jpg','10000000-0000-0000-0000-00000000000a'),
-('20000000-0000-0000-0000-000000000030','1003',2,190.00,'Suíte boutique com serviços personalizados.','https://www.travelandleisure.com/thmb/JioqZXurmgjBU-aRjKthU7oKu8A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/1-71d7208a004a48b7bc1617a7e77183ea.jpg','10000000-0000-0000-0000-00000000000a'),
+('20000000-0000-0000-0000-000000000030','1003',2,190.00,'Suíte boutique com serviços personalizados.','https://images.pexels.com/photos/16436963/pexels-photo-16436963.jpeg','10000000-0000-0000-0000-00000000000a'),
 ('20000000-0000-0000-0000-000000000031','1004',3,210.00,'Quarto loft para famílias pequenas.','https://www.travelandleisure.com/thmb/BVXwxaCEyKbstCpScLm0tKPxuIE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/1-b76afaa92ebb4386b92ccd18395f5880.jpg','10000000-0000-0000-0000-00000000000a'),
 ('20000000-0000-0000-0000-000000000032','1005',4,260.00,'Quarto com varanda privativa e café incluído.','https://www.coralbeachmyrtlebeachresort.com/wp-content/uploads/2022/02/Coral-Beach-OceanView-Queen-scaled.jpg','10000000-0000-0000-0000-00000000000a');
 

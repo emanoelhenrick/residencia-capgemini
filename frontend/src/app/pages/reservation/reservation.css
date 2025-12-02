@@ -455,6 +455,21 @@ textarea {
   background: #f5f5f5;
 }
 
+.btn-confirm{
+    background-color: #0071c2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    display: flex;
+    gap: 5px;
+}
+.btn-confirm:hover{
+  opacity: 0.9;
+}
+
 /* Responsividade */
 @media (max-width: 900px) {
   .reservation-content {

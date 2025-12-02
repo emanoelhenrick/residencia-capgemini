@@ -141,6 +141,8 @@ export class Room implements OnInit {
 
   // accommodations.ts - adicione este método
 abrirModalReserva(accommodation: any, room: any): void {
+  this.bsModalRef?.hide();
+  
   const initialState = {
     accommodation: accommodation,
     room: room

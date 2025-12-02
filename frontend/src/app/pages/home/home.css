@@ -6,34 +6,29 @@ header{
     box-shadow: 8px 5px 15px rgba(0, 0, 0, 0.1);
 
 }
-.titulo {
+.logo {
     display: flex;
     gap: 8px;
 }
 
-.titulo svg{
-    transform: rotate(40deg);
-}
-
-.titulo h1 {
+.logo h1 {
     font-size: 1.5rem;
     font-weight: 400;
 }
 
 
-.btn_auth {
-    display: flex;
-    gap: 5px;
-}
-
-.btn_auth button {
+.btn-logout{
+    background: white;
+    border: 1.5px solid #b1b1b1;
     border-radius: 8px;
-    border: none;
-    padding: 5px 7px 5px 7px;
-
-    font-weight: 600;
+    padding: 2px 6px;
 }
 
+.btn-logout:hover{
+    background-color: #b1b1b1;
+    color: white;
+    transition: 0.5s ease   ;
+}
 #signup {
     background-color: var(--btn_secondary);
     color: white;
@@ -49,4 +44,46 @@ header{
 
 .app-objects {
     margin-top: 2rem;
+}
+
+.main-content{
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+}
+
+app-accommodations{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-login{
+    background: none;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+
+}
+
+.btn-login:hover{
+    background-color: #c4c3c3;
+    transition: 0.5s ease;
+}
+
+.btn-signup{
+    background-color: var(--btn_secondary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+.btn-signup:hover{
+    background-color: var(--btn_secondary_hover);
+    transition: 0.5s ease;
+}   
+
+.auth-buttons{
+    display: flex;
+    gap: 1rem;
 }

@@ -8,22 +8,23 @@
     
     <div *ngFor="let room of roomsList" class="room-card">
       <img [src]="room.img || room.accommodation?.img" alt="Imagem do quarto"  />
-      <h3>Quarto {{ room.number }} — {{ room.accommodation?.name }}</h3>
-      <p>{{ room.description }}</p>
+      <div class="room-card-content">
+        <h3>Quarto {{ room.number }} — {{ room.accommodation?.name }}</h3>
+        <p>{{ room.description }}</p>
 
-      <div class="room-meta">
-        <p><lucide-icon name="users" size="16"></lucide-icon> {{ room.capacity || room.quant_de_hospedes || '-' }} pessoas</p>
-      </div>
-
-      <div class="parte_baixo">
-        <p class="price">{{ room.pricePerNight | currency }} / noite</p>
-        <div class="room-actions">
-          <button (click)="abrirModalRoom(room.accommodation, room)">Ver Detalhes</button>
+        <div class="room-meta">
+          <p><lucide-icon name="users" size="16"></lucide-icon> {{ room.capacity || room.quant_de_hospedes || '-' }} pessoas</p>
+          <p class="price">{{ room.pricePerNight | currency:'EUR' }} / noite</p>
+          
         </div>
-          <button class="btn-reserve" (click)="abrirModalReserva(room.accommodation, room)">
-           Reservar Agora
-          </button>
+
+        <div class="room-actions">
+          <button class="btn_room" (click)="abrirModalRoom(room.accommodation, room)">Detalhes</button>
+          <button class="btn-reserve" (click)="abrirModalReserva(room.accommodation, room)">Reservar</button>
+        </div>
+        
       </div>
+      
     </div>
   </div>
 </div>s
