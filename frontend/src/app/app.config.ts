@@ -10,11 +10,8 @@ import {   LucideAngularModule,
   Bed, 
   Bath, 
   Calendar,
-  CheckCircle,
-  XCircle,
   Clock,
   Search,
-  Filter,
   Download,
   Building,
   DoorClosed,
@@ -33,7 +30,9 @@ import {   LucideAngularModule,
   Check,
   X,
   Plus,
-  Minus } from 'lucide-angular';
+  Minus,
+  Plane,
+   } from 'lucide-angular';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
@@ -49,11 +48,8 @@ export const appConfig: ApplicationConfig = {
         Bed, 
         Bath,
         Calendar,
-        CheckCircle,
-        XCircle,
         Clock,
         Search,
-        Filter,
         Download,
         Building,
         DoorClosed,
@@ -72,7 +68,8 @@ export const appConfig: ApplicationConfig = {
         Check,
         X,
         Plus,
-        Minus
+        Minus,
+        Plane
           })
         ),
     BsModalService,

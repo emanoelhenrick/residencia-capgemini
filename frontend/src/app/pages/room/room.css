@@ -1,49 +1,71 @@
 .fundo_branco{
-    background-color: white;
-    /* Ajusta largura ao conteúdo (cresce conforme cards) */
-    display: inline-block;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: 100%; /* evita ultrapassar a largura da viewport */
-    margin: 0 auto; /* centra quando couber */
-    border-radius: 10px;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: auto; /* permite scroll se o conteúdo for maior que a tela */
+   overflow: hidden;
 }
 
-.rooms-container{
+.title-modal{
     display: flex;
-    flex-direction: row;
-    /* não quebrar (mantém os cards em linha e faz o container crescer horizontalmente) */
-    flex-wrap: nowrap;
-    align-items: stretch; /* Estica os cards verticalmente */
-    justify-content: flex-start; /* Alinha à esquerda */
-    gap: 20px;
-    /* Container naturalmente se expande conforme o número de cards */
-    width: auto;
-    min-height: 200px; /* Altura mínima do container */
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}   
+
+.title-modal button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s ease;
+    position: absolute;
+    top:     20px;
+    right: 1rem;
+    z-index: 1;
 }
 
-.room_card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    /* largura fixa para que o container cresça horizontalmente */
-    flex: 0 0 300px; /* não encolhe nem cresce, base 300px */
-    min-width: 300px;
-    /* Cresce verticalmente com conteúdo */
-    height: auto;
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distribui conteúdo */
+.title-modal button:hover{
+    transform: scale(1.2);
 }
 
+img{
+    display: block;
+    width: 100%;
+}
+
+#icon_x{
+    color : white
+}
 #nameHotel{
 
     font-weight: bold;
     cursor: pointer;
+}
+
+.baixo{
+    padding: 0 1rem 1rem 1rem ;
+}
+
+.parte_baixo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.8rem;
+}       
+
+.modalReserva{
+    background-color: #0071c2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#Price{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.vibe{
+    margin-top: 1rem;
 }

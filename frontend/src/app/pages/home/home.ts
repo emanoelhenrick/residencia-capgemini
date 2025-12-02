@@ -5,13 +5,14 @@ import { Auth } from '../auth/auth';
 import { Accommodations } from '../accommodations/accommodations';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
   standalone: true,
-  imports: [Auth, Accommodations, CommonModule]
+  imports: [Auth, Accommodations, CommonModule, LucideAngularModule],
 })
 export class Home {
   bsModalRef?: BsModalRef;

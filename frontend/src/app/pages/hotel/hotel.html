@@ -62,9 +62,7 @@
             <div *ngIf="room.amenities?.length" class="room-amenities">
               <strong>Comodidades:</strong>
               <div class="amenities-tags">
-                <span *ngFor="let amenity of room.amenities" class="amenity-tag">
-                  {{ amenity }}
-                </span>
+                <span *ngFor="let amenity of room.amenities" class="amenity-tag">{{ amenity }}</span>
               </div>
             </div>
 
