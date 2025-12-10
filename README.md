@@ -27,3 +27,8 @@ O diagrama abaixo ilustra o fluxo de atividades do sistema, separando as ações
 ### Entrega 2
 <img width="1366" height="768" alt="Captura de tela 2025-10-22 202719" src="https://github.com/user-attachments/assets/6777b0b9-418f-4b58-9fa9-e8e02c2afecd" />
 
+### Entrega 3
+<img width="1375" height="758" alt="Captura de tela de 2025-12-09 22-50-40" src="https://github.com/user-attachments/assets/8e51ea04-e7a4-4821-853e-a5dcb2570217" />
+
+### Entrega 4
+<img width="1372" height="761" alt="Captura de tela de 2025-12-09 22-51-01" src="https://github.com/user-attachments/assets/c2af3441-6d1a-43f7-8a9b-925d64d817ec" />
