@@ -11,8 +11,12 @@ A equipe do projeto é composta pelos seguintes membros e suas respectivas funç
 - **Davi Lucas** - Desenvolvedor
 - **Nicolas Natario** - Desenvolvedor
   
-## 3. Screencast
+## 3.1 Screencast - Figma
 https://github.com/user-attachments/assets/388dbf06-baf7-465b-af96-b553e8502f93
+
+### 3.2 Screencast - Implementação
+https://github.com/user-attachments/assets/015f58ea-bdf4-4ae9-a229-806d782f86e1
+
 
 ## 4. Diagrama de Atividades
 O diagrama abaixo ilustra o fluxo de atividades do sistema, separando as ações do cliente (client-side) e do servidor (backend-side), incluindo a interação com a API de Inteligência Artificial para a geração do roteiro.
